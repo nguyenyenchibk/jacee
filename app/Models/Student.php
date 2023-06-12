@@ -6,12 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Admin extends Authenticatable
+class Student extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    protected $guard='admin';
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +24,7 @@ class Admin extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'status',
         'password',
     ];
 
@@ -43,24 +47,13 @@ class Admin extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
-    public function students(): HasMany
+    public function setPasswordAttribute($value)
     {
-        return $this->hasMany(Student::class);
+        $this->attributes['password'] = Hash::make($value);
     }
 
-    public function teachers(): HasMany
+    public function admin(): BelongsTo
     {
-        return $this->hasMany(Teacher::class);
-    }
-
-    public function categories(): HasMany
-    {
-        return $this->hasMany(Category::class);
-    }
-
-    public function courses(): HasMany
-    {
-        return $this->hasMany(Course::class);
+        return $this->belongsTo(Admin::class);
     }
 }
