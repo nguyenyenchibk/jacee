@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.teacher')
 @section('title','Dashboard')
 @section('content')
 
@@ -9,12 +9,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Admin</h1>
+                    <h1 class="m-0">Teacher</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Admin</li>
+                        <li class="breadcrumb-item active">Teacher</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -33,7 +33,7 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>44</h3>
+                            <h3>1</h3>
 
                             <p>Total students</p>
                         </div>
@@ -47,7 +47,7 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>33</h3>
+                            <h3>1</h3>
 
                             <p>Total admins</p>
                         </div>
@@ -62,7 +62,7 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>22</h3>
+                            <h3>1</h3>
 
                             <p>Exams</p>
                         </div>

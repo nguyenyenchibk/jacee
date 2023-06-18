@@ -8,34 +8,27 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Course extends Model
+class Test extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
     protected $fillable = [
-        'teacher_id',
-        'category_id',
-        'name',
-        'code',
+        'validate_date',
+        'interval',
+        'max_score',
         'status',
+        'name',
         'description',
-        'started_at',
-        'ended_at'
     ];
 
-    public function getFullNameAttribute($value)
+    public function lesson(): BelongsTo
     {
-        return "{$this->code} - {$this->name}";
+        return $this->belongsTo(Lesson::class);
     }
 
-    public function admin(): BelongsTo
+    public function questions(): HasMany
     {
-        return $this->belongsTo(Admin::class);
-    }
-
-    public function lessons(): HasMany
-    {
-        return $this->hasMany(Lesson::class);
+        return $this->hasMany(Question::class);
     }
 }

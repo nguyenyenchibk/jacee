@@ -3,9 +3,10 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
+
                     <div class="card-body">
-                        <h1 class="text-center"><b>Admin Login</b> </h1>
-                        <form method="POST" action="{{ route('admin.login') }}" class="mt-4">
+                        <h1 class="text-center">Teacher Login</h1>
+                        <form method="POST" action="{{ route('teacher.login') }}" class="mt-4">
                             @csrf
 
                             <div class="form-group row">

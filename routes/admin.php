@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\AdminController;
 
 Route::prefix('admin')->middleware('theme:admin')->name('admin.')->group(function(){
     Route::middleware(['guest:admin'])->group(function(){
@@ -13,6 +14,7 @@ Route::prefix('admin')->middleware('theme:admin')->name('admin.')->group(functio
         Route::post('/login', [AuthenticatedSessionController::class, 'store']);
     });
     Route::middleware(['auth:admin'])->middleware('theme:dashboard')->group(function(){
+        Route::get('/dashboard',[AdminController::class,'index']);
         Route::controller(TeacherController::class)->prefix('teachers')->name('teacher.')->group(function () {
             Route::get('/', 'index')->name('index');
             Route::get('create', 'create')->name('create');

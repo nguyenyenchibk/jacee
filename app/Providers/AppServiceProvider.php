@@ -10,6 +10,12 @@ use App\Services\Interfaces\CategoryServiceInterface;
 use App\Services\CategoryService;
 use App\Services\Interfaces\CourseServiceInterface;
 use App\Services\CourseService;
+use App\Services\Interfaces\LessonServiceInterface;
+use App\Services\LessonService;
+use App\Services\Interfaces\TestServiceInterface;
+use App\Services\TestService;
+use App\Services\Interfaces\QuestionServiceInterface;
+use App\Services\QuestionService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -34,6 +40,18 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             CourseServiceInterface::class,
             CourseService::class
+        );
+        $this->app->bind(
+            LessonServiceInterface::class,
+            LessonService::class
+        );
+        $this->app->bind(
+            TestServiceInterface::class,
+            TestService::class
+        );
+        $this->app->bind(
+            QuestionServiceInterface::class,
+            QuestionService::class
         );
     }
 

@@ -34,4 +34,10 @@ class CourseService extends Service implements CourseServiceInterface
         $course->delete($course);
         return true;
     }
+
+    public function teacherGetCourse()
+    {
+        $courses = Course::where('teacher_id', auth()->guard('teacher')->user()->id)->get();
+        return $courses;
+    }
 }
