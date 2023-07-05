@@ -15,6 +15,8 @@ class Teacher extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
     use SoftDeletes;
 
+    protected $guard = 'teacher';
+
     /**
      * The attributes that are mass assignable.
      *

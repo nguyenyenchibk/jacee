@@ -24,10 +24,10 @@ class QuestionRequest extends FormRequest
     public function rules()
     {
         return [
-            'content' => 'required',
+            'question' => 'required',
             'status' => 'required|integer',
             'score' => 'integer',
-            'answers.*.content' => 'required',
+            'answers.*.answer' => 'required',
             'answers.*.is_correct' => 'present'
         ];
     }

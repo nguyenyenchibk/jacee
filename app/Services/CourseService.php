@@ -40,4 +40,22 @@ class CourseService extends Service implements CourseServiceInterface
         $courses = Course::where('teacher_id', auth()->guard('teacher')->user()->id)->get();
         return $courses;
     }
+
+    public function getLessonOfCourse(Course $course)
+    {
+        $lessons = $course->lessons()->get();
+        return $lessons;
+    }
+
+    public function addStudents(FormRequest $request, Course $course)
+    {
+        $student = $course->students()->syncWithoutDetaching($request->student_id);
+        return $student;
+    }
+
+    public function getCourseOfStudent()
+    {
+        $courses = auth()->guard('student')->user()->courses()->get();
+        return $courses;
+    }
 }

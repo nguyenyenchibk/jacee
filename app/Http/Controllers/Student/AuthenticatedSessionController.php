@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\StudentLoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
-use Illuminate\Support\Facades\Session;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -28,21 +26,13 @@ class AuthenticatedSessionController extends Controller
      * @param  \App\Http\Requests\Auth\LoginRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(LoginRequest $request)
+    public function store(StudentLoginRequest $request)
     {
-       
-        $user = User::where('email',$request->email)->get()->first();
-        
-        if($user){
-            $request->session()->put('id',$user->id);
-        }
-        
-        
         $request->authenticate();
-        
+
         $request->session()->regenerate();
-        
-        return redirect(RouteServiceProvider::HOME);
+
+        return redirect(RouteServiceProvider::STUDENT_HOME);
     }
 
     /**
@@ -53,7 +43,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request)
     {
-        Auth::guard('web')->logout();
+        Auth::guard('student')->logout();
 
         $request->session()->invalidate();
 

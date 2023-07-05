@@ -26,35 +26,37 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Test Information</h3>
+                                <div class="card-tools">
+                                    <a href="#"
+                                        class="btn btn-light">Cancel</a>
+                                </div>
                             </div>
                             <div class="card-body">
-                                <form class="mt-4">
+                                <form class="mt-0">
                                     <div class="form-group row">
-                                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name')
-                                            }}</label>
-
-                                        <div class="col-md-6">
-                                            <input id="name" type="text"
-                                                class="form-control @error('name') is-invalid @enderror" name="name"
-                                                value="{{ $test->name }}" required autocomplete="name" autofocus
-                                                disabled>
+                                        <label for="name" class="col-md-1 col-form-label">Name:</label>
+                                        <div class="col-sm-2">
+                                            <p class="form-control-plaintext" id="name">{{ $test->name }}</p>
+                                        </div>
+                                        <label for="validate_date" class="col-form-label">Deadline:</label>
+                                        <div class="col-sm-2">
+                                            <p class="form-control-plaintext" id="validate_date">{{ $test->validate_date }}</p>
+                                        </div>
+                                        <label for="time" class="col-form-label">Interval:</label>
+                                        <div class="col-sm-2">
+                                            <p class="form-control-plaintext" id="time">{{ $test->time }}</p>
                                         </div>
                                     </div>
-
                                     <div class="form-group row">
-                                        <label for="description" class="col-md-4 col-form-label text-md-right">{{
-                                            __('Description') }}</label>
-
+                                        <label for="description" class="col-md-1 col-form-label">Description:</label>
                                         <div class="col-md-6">
-                                            <textarea id="description" name="description" class="form-control"
-                                                style="height: 100px" disabled>{{ $test->description }}</textarea>
+                                            <p class="form-control-plaintext" id="description">{{ $test->description }}
+                                            </p>
                                         </div>
                                     </div>
-                                    <div class="mb-0 form-group row">
-                                        <div class="col-md-6 offset-md-4">
-                                            <a class="btn btn-info btn-sm" href="javascript:;" data-toggle="modal"
-                                                data-target="#myModal">Add new</a>
-                                        </div>
+                                    <div class="form-group row">
+                                        <a class="btn btn-info btn-sm" href="javascript:;" data-toggle="modal"
+                                            data-target="#myModal">Add question</a>
                                     </div>
                                 </form>
                             </div>
@@ -77,8 +79,8 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="content">Enter Question</label>
-                                    <input type="text" required="required" name="content" placeholder="Enter Question"
+                                    <label for="question">Enter Question</label>
+                                    <input type="text" required="required" name="question" placeholder="Enter Question"
                                         class="form-control">
                                 </div>
                             </div>
@@ -105,7 +107,8 @@
                                             <input type="hidden" value="0" name="answers[1][is_correct]">
                                             <input type="checkbox" value="1" name="answers[1][is_correct]">
                                         </div>
-                                        <input name="answers[1][content]" value="{{ old('answers.1.content') }}" type="text" class="form-control">
+                                        <input name="answers[1][answer]" value="{{ old('answers.1.answer') }}"
+                                            type="text" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -117,7 +120,8 @@
                                             <input type="hidden" value="0" name="answers[2][is_correct]">
                                             <input type="checkbox" value="1" name="answers[2][is_correct]">
                                         </div>
-                                        <input name="answers[2][content]" value="{{ old('answers.2.content') }}" type="text" class="form-control">
+                                        <input name="answers[2][answer]" value="{{ old('answers.2.answer') }}"
+                                            type="text" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -129,7 +133,8 @@
                                             <input type="hidden" value="0" name="answers[3][is_correct]">
                                             <input type="checkbox" value="1" name="answers[3][is_correct]">
                                         </div>
-                                        <input name="answers[3][content]" value="{{ old('answers.3.content') }}" type="text" class="form-control">
+                                        <input name="answers[3][answer]" value="{{ old('answers.3.answer') }}"
+                                            type="text" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -141,13 +146,14 @@
                                             <input type="hidden" value="0" name="answers[4][is_correct]">
                                             <input type="checkbox" value="1" name="answers[4][is_correct]">
                                         </div>
-                                        <input name="answers[4][content]" value="{{ old('answers.4.content') }}" type="text" class="form-control">
+                                        <input name="answers[4][answer]" value="{{ old('answers.4.answer') }}"
+                                            type="text" class="form-control">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="content">Enter Score</label>
+                                    <label for="score">Enter Score</label>
                                     <input type="integer" required="required" name="score" placeholder="Enter Score"
                                         class="form-control">
                                 </div>
@@ -162,9 +168,6 @@
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
-
-
         @endsection

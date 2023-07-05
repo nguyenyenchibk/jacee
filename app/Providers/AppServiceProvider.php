@@ -16,6 +16,12 @@ use App\Services\Interfaces\TestServiceInterface;
 use App\Services\TestService;
 use App\Services\Interfaces\QuestionServiceInterface;
 use App\Services\QuestionService;
+use App\Services\Interfaces\FileServiceInterface;
+use App\Services\FileService;
+use App\Services\Interfaces\DiscussionServiceInterface;
+use App\Services\DiscussionService;
+use App\Services\Interfaces\CommentServiceInterface;
+use App\Services\CommentService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -52,6 +58,18 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             QuestionServiceInterface::class,
             QuestionService::class
+        );
+        $this->app->bind(
+            FileServiceInterface::class,
+            FileService::class
+        );
+        $this->app->bind(
+            DiscussionServiceInterface::class,
+            DiscussionService::class
+        );
+        $this->app->bind(
+            CommentServiceInterface::class,
+            CommentService::class
         );
     }
 

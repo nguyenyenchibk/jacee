@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Course extends Model
 {
@@ -29,6 +30,11 @@ class Course extends Model
         return "{$this->code} - {$this->name}";
     }
 
+    public function getPeriodAttribute($value)
+    {
+        return "{$this->started_at} ~ {$this->ended_at}";
+    }
+
     public function admin(): BelongsTo
     {
         return $this->belongsTo(Admin::class);
@@ -37,5 +43,10 @@ class Course extends Model
     public function lessons(): HasMany
     {
         return $this->hasMany(Lesson::class);
+    }
+
+    public function students(): BelongsToMany
+    {
+        return $this->belongsToMany(Student::class);
     }
 }

@@ -16,6 +16,8 @@ class Student extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
     use SoftDeletes;
 
+    protected $guard = 'student';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -55,5 +57,15 @@ class Student extends Authenticatable
     public function admin(): BelongsTo
     {
         return $this->belongsTo(Admin::class);
+    }
+
+    public function courses(): BelongsToMany
+    {
+        return $this->belongsToMany(Course::class);
+    }
+
+    public function tests(): BelongsToMany
+    {
+        return $this->belongsToMany(Test::class);
     }
 }

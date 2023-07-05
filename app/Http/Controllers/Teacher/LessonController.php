@@ -9,14 +9,20 @@ use App\Http\Controllers\Controller;
 use App\Services\Interfaces\LessonServiceInterface;
 use App\Http\Requests\Teacher\Lesson\LessonRequest;
 use App\Http\Requests\Admin\Course\UpdateCourseRequest;
+use App\Services\Interfaces\FileServiceInterface;
+use App\Services\Interfaces\DiscussionServiceInterface;
 
 class LessonController extends Controller
 {
     protected $lessonService;
+    protected $fileService;
+    protected $discussionService;
 
-    public function __construct(LessonServiceInterface $lessonService)
+    public function __construct(LessonServiceInterface $lessonService, FileServiceInterface $fileService, DiscussionServiceInterface $discussionService)
     {
         $this->lessonService = $lessonService;
+        $this->fileService = $fileService;
+        $this->discussionService = $discussionService;
     }
 
     public function index()
@@ -52,9 +58,12 @@ class LessonController extends Controller
      * @param  \App\Models\Lesson  $lesson
      * @return \Illuminate\Http\Response
      */
-    public function show(Lesson $lesson)
+    public function show(Course $course, Lesson $lesson)
     {
-        return view('teacher.lesson.show', compact('lesson'));
+        $tests = $this->lessonService->getTestOfLesson($lesson);
+        $files = $this->fileService->index($lesson);
+        $discussions = $this->discussionService->index($lesson);
+        return view('teacher.lesson.show', compact('course', 'lesson', 'tests', 'files', 'discussions'));
     }
 
     /**

@@ -26,7 +26,7 @@
                             <div class="card-header">
                                 <h3 class="card-title">List</h3>
                                 <div class="card-tools">
-                                    <a href="{{ route('admin.student.create') }}" class="btn btn-info btn-l" href="">Add new</a>
+                                    <a href="{{ route('admin.student.create') }}" class="btn btn-primary btn-l">Add new</a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -53,8 +53,7 @@
                                             @endif
                                             <td>
                                                 <div class="btn-group">
-                                                    <button type="button" class="btn btn-warning"><a
-                                                        href="{{ route('admin.student.edit', $student->id) }}">Edit</a></button>
+                                                    <a class="btn btn-primary" href="{{ route('admin.student.edit', $student->id) }}">Edit</a>
                                                     <form id="delete-confirm" action="{{ route('admin.student.delete', $student->id )}}" method="POST">
                                                         @csrf
                                                         @method('DELETE')

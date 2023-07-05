@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\AdminLoginRequest;
-use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,10 +28,8 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(AdminLoginRequest $request)
     {
-
         $request->authenticate();
 
-       
         $request->session()->regenerate();
 
         return redirect(RouteServiceProvider::ADMIN_HOME);
@@ -46,7 +43,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request)
     {
-        Auth::guard('web')->logout();
+        Auth::guard('admin')->logout();
 
         $request->session()->invalidate();
 

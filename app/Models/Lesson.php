@@ -28,4 +28,14 @@ class Lesson extends Model
     {
         return $this->hasMany(Test::class);
     }
+
+    public function files(): HasMany
+    {
+        return $this->hasMany(File::class);
+    }
+
+    public function discussions(): HasMany
+    {
+        return $this->hasMany(Discussion::class);
+    }
 }

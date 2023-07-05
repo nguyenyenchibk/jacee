@@ -12,4 +12,5 @@ interface StudentServiceInterface extends ServiceInterface
     public function create(FormRequest $request);
     public function update(FormRequest $request, Student $teacher);
     public function delete(Student $teacher);
+    public function getActiveAccounts();
 }

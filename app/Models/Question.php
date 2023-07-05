@@ -14,7 +14,7 @@ class Question extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'content',
+        'question',
         'status',
         'score',
     ];

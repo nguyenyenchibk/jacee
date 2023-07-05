@@ -22,4 +22,10 @@ class LessonService extends Service implements LessonServiceInterface
         $lesson = $course->lessons()->create($input);
         return $lesson;
     }
+
+    public function getTestOfLesson(Lesson $lesson)
+    {
+        $tests = $lesson->tests()->get();
+        return $tests;
+    }
 }

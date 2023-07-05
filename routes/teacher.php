@@ -7,6 +7,9 @@ use App\Http\Controllers\Teacher\CourseController;
 use App\Http\Controllers\Teacher\LessonController;
 use App\Http\Controllers\Teacher\TestController;
 use App\Http\Controllers\Teacher\QuestionController;
+use App\Http\Controllers\Teacher\FileController;
+use App\Http\Controllers\Teacher\DiscussionController;
+use App\Http\Controllers\Teacher\CommentController;
 
 Route::prefix('teacher')->middleware('theme:teacher')->name('teacher.')->group(function(){
     Route::middleware(['guest:teacher'])->group(function(){
@@ -17,20 +20,29 @@ Route::prefix('teacher')->middleware('theme:teacher')->name('teacher.')->group(f
         Route::get('/dashboard',[TeacherController::class,'index']);
         Route::controller(CourseController::class)->prefix('courses')->name('course.')->group(function () {
             Route::get('/', 'teacherGetCourse')->name('index');
-            Route::get('/{course}/show', 'show')->name('show');
+            Route::get('{course}/show', 'show')->name('show');
+            Route::post('{course}/storeStudents', 'storeStudents')->name('storeStudents');
         });
         Route::controller(LessonController::class)->prefix('courses')->name('lesson.')->group(function () {
             Route::get('{course}/lessons/create', 'create')->name('create');
             Route::post('{course}/lessons', 'store')->name('store');
-            Route::get('lessons/{lesson}/show', 'show')->name('show');
+            Route::get('{course}/lessons/{lesson}/show', 'show')->name('show');
         });
         Route::controller(TestController::class)->prefix('lessons')->name('test.')->group(function () {
-            Route::get('{lesson}/tests/create', 'create')->name('create');
-            Route::post('{lesson}/tests', 'store')->name('store');
+            Route::get('{course}/{lesson}/tests/create', 'create')->name('create');
+            Route::post('{course}/{lesson}/tests', 'store')->name('store');
             Route::get('tests/{test}/show', 'show')->name('show');
         });
+        Route::controller(FileController::class)->prefix('lessons')->name('file.')->group(function () {
+            Route::post('{course}/{lesson}/file', 'store')->name('store');
+        });
+        Route::controller(DiscussionController::class)->prefix('lessons')->name('discussion.')->group(function () {
+            Route::post('{course}/{lesson}/discussion', 'store')->name('store');
+        });
+        Route::controller(CommentController::class)->prefix('lessons')->name('comment.')->group(function () {
+            Route::post('{course}/{lesson}/{discussion}/comment', 'store')->name('store');
+        });
         Route::controller(QuestionController::class)->prefix('tests')->name('question.')->group(function () {
-            // Route::get('{test}/questions/create', 'create')->name('create');
             Route::post('{test}/questions', 'store')->name('store');
             Route::get('questions/{question}/show', 'show')->name('show');
         });

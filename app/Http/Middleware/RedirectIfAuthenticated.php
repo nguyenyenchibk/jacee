@@ -29,6 +29,9 @@ class RedirectIfAuthenticated
                 elseif($guard=='teacher'){
                     return redirect(RouteServiceProvider::TEACHER_HOME);
                 }
+                elseif($guard=='student'){
+                    return redirect(RouteServiceProvider::STUDENT_HOME);
+                }
                 return redirect(RouteServiceProvider::HOME);
             }
         }

@@ -30,7 +30,7 @@
                     </button>
                   </li>
                   <li class="nav-item btn-contact-us pl-4 pl-lg-0">
-                    <a href="{{ url('/admin/login') }}"  class="btn btn-info" data-toggle="modal" data-target="#exampleModal">Admin Login</a>
+                    <a href="{{ route('admin.login') }}"  class="btn btn-info" data-toggle="modal" data-target="#exampleModal">Admin Login</a>
                   </li>
                 </ul>
               </div>
@@ -39,10 +39,11 @@
           </header>
           <div class="banner" >
             <div class="container">
-              <h1 class="font-weight-semibold">Welcome to online quiz application</h1>
+              <h1 class="font-weight-semibold">Welcome to online jacee application</h1>
               <h6 class="font-weight-normal text-muted pb-3">Create and take students assesment tests in very reliable and fast way</h6>
               <div>
-                    <a href="{{ url('/teacher/login') }}" class="btn btn-opacity-light mr-1"><b>Teacher Login</b></a>
+                    <a href="{{ route('teacher.login') }}" class="btn btn-opacity-light mr-1"><b>Teacher Login</b></a>
+                    <a href="{{ route('student.login') }}" class="btn btn-opacity-light mr-1"><b>Student Login</b></a>
               </div>
               <img src="{{ url('assets/images/Group171.svg')}}" alt="" class="img-fluid">
             </div>

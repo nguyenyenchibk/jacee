@@ -6,12 +6,13 @@ use App\Services\Service;
 use App\Services\Interfaces\QuestionServiceInterface;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Models\Test;
+use App\Models\Question;
 
 class QuestionService extends Service implements QuestionServiceInterface
 {
     public function index(Test $test)
     {
-        $questions = Test::where('test_id', $test->id)->get();
+        $questions = Question::where('test_id', $test->id)->get();
         return $questions;
     }
 

@@ -28,7 +28,7 @@
                                 <h3 class="card-title">Test Information</h3>
                             </div>
                             <div class="card-body">
-                                <form method="POST" action="{{ route('teacher.test.store', $lesson->id) }}" class="mt-4">
+                                <form method="POST" action="{{ route('teacher.test.store', [$course, $lesson]) }}" class="mt-4">
                                     @csrf
                                     <div class="form-group row">
                                         <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
@@ -99,7 +99,7 @@
 
                                     <div class="mb-0 form-group row">
                                         <div class="col-md-6 offset-md-4">
-                                            <a class="btn btn-outline-primary" href="{{ route('teacher.lesson.show', $lesson->id) }}" role="button">Cancel</a>
+                                            <a class="btn btn-outline-primary" href="{{ route('teacher.lesson.show', [$course, $lesson]) }}">Cancel</a>
 
                                             <button type="submit" class="btn btn-primary">
                                                 {{ __('Create') }}

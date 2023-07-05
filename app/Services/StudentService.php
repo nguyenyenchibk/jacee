@@ -34,4 +34,10 @@ class StudentService extends Service implements StudentServiceInterface
         $student->delete($student);
         return true;
     }
+
+    public function getActiveAccounts()
+    {
+        $students = Student::where('status', 1)->get();
+        return $students;
+    }
 }

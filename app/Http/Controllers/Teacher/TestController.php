@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Teacher;
 use App\Http\Controllers\Controller;
 use App\Models\Test;
 use App\Models\Lesson;
+use App\Models\Course;
 use Illuminate\Http\Request;
 use App\Http\Requests\Teacher\Test\TestRequest;
 use App\Services\Interfaces\TestServiceInterface;
-
 class TestController extends Controller
 {
     protected $testService;
@@ -32,9 +32,9 @@ class TestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Lesson $lesson)
+    public function create(Course $course, Lesson $lesson)
     {
-        return view('teacher.test.create', compact('lesson'));
+        return view('teacher.test.create', compact('course', 'lesson'));
     }
 
     /**
@@ -43,10 +43,10 @@ class TestController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Lesson $lesson, TestRequest $request)
+    public function store(Course $course, Lesson $lesson, TestRequest $request)
     {
         $this->testService->create($lesson, $request);
-        return redirect()->route('teacher.lesson.show', compact('lesson'));
+        return redirect()->route('teacher.lesson.show', compact('course', 'lesson'));
     }
 
     /**

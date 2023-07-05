@@ -13,4 +13,7 @@ interface CourseServiceInterface extends ServiceInterface
     public function update(FormRequest $request, Course $course);
     public function delete(Course $course);
     public function teacherGetCourse();
+    public function getLessonOfCourse(Course $course);
+    public function addStudents(FormRequest $request, Course $course);
+    public function getCourseOfStudent();
 }
