@@ -56,14 +56,12 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-10">
-                                                <a href="{{ Storage::disk('s3')->url($file['downloadUrl']) }}">{{ $file['name'] }}</a>
-                                            </div>
-                                            <div class="col-md-2">
-
+                                                <a href="{{ Storage::disk('s3')->url($file['downloadUrl']) }}">{{
+                                                    $file['name'] }}</a>
                                             </div>
                                         </div>
                                     </div>
-                                  </div>
+                                </div>
                                 @endforeach
                                 @foreach ($tests as $test)
                                 <div class="card mt-3">
@@ -144,6 +142,7 @@
                                                                 @csrf
                                                                 <input id="content" type="text"
                                                                     class="form-control @error('content') is-invalid @enderror"
+                                                                    style="width: 54rem;"
                                                                     placeholder="Leave Comment here" name="content"
                                                                     value="{{ old('content') }}" required
                                                                     autocomplete="content" autofocus>
@@ -184,6 +183,27 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
+                    @foreach ($files as $file)
+                    <div class="card" style="width: 36rem;">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <a href="{{ Storage::disk('s3')->url($file['downloadUrl']) }}">{{ $file['name']
+                                        }}</a>
+                                </div>
+                                <div class="col-md-2">
+                                    <form action="#" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">
+                                            {{ __('X') }}
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
                     <form action="{{ route('teacher.file.store', [$course, $lesson]) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf

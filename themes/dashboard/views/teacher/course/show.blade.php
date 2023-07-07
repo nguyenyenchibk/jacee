@@ -89,8 +89,35 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="student_id">Enter Student</label>
-                                    <input name="student_id" placeholder="Enter Student"
-                                        class="form-control">
+                                    <table class="table table-striped table-bordered table-hover datatable">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>#ID</th>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($students as $student)
+                                            @php
+                                                $exist = DB::table('course_student')->where('student_id', $student->id)->where('course_id', $course->id)->first();
+                                            @endphp
+                                            <tr>
+                                                @if($exist)
+                                                    <td><input type="checkbox" value="{{ $student->id }}" name="student_id[{{ $student->id }}]" checked></td>
+                                                @else
+                                                <td><input type="checkbox" value="{{ $student->id }}" name="student_id[{{ $student->id }}]"></td>
+                                                @endif
+                                                <td>{{ $student->id }}</td>
+                                                <td>{{ $student->name }}</td>
+                                                <td>{{ $student->email }}</td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                        <tfoot>
+                                        </tfoot>
+                                    </table>
                                 </div>
                             </div>
                             <div class="col-sm-12">

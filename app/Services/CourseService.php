@@ -49,7 +49,7 @@ class CourseService extends Service implements CourseServiceInterface
 
     public function addStudents(FormRequest $request, Course $course)
     {
-        $student = $course->students()->syncWithoutDetaching($request->student_id);
+        $student = $course->students()->sync($request['student_id']);
         return $student;
     }
 
