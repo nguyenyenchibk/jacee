@@ -27,6 +27,8 @@
                                 <h3 class="card-title">List</h3>
                                 <div class="card-tools">
                                     <a href="{{ route('admin.teacher.create') }}" class="btn btn-primary btn-l">Add new</a>
+                                    <a class="btn btn-success" href="javascript:;" data-toggle="modal"
+                                        data-target="#myModal">Import</a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -76,25 +78,26 @@
             </div>
         </section>
     </div>
-    <div class="modal fade" id="deleteModel" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Delete</h4>
+                    <h4 class="modal-title">Import Excel File</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <label for="delete" class="form-label">Are you sure delete this account ?</label>
-                    <div class="mb-0 form-group row">
-                        <div class="col-md-6 offset-md-4">
-                            <a class="btn btn-outline-primary" href="{{ route('admin.teacher.index') }}"
-                                role="button">Cancel</a>
-                            <button type="submit" form="delete-confirm" class="btn btn-danger">
-                                {{ __('Delete') }}
-                            </button>
+                    <form action="{{ route('admin.teacher.import') }}" method="POST"
+                        enctype="multipart/form-data">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-10">
+                                <input type="file" name="file" class="form-control" />
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-success">Upload File...</button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

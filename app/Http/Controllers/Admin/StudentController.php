@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Student;
+use Illuminate\Http\Request;
 use App\Services\Interfaces\StudentServiceInterface;
 use App\Http\Requests\Admin\Student\StudentRequest;
 use App\Http\Requests\Admin\Student\UpdateStudentRequest;
+use App\Imports\StudentsImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StudentController extends Controller
 {
@@ -73,6 +76,13 @@ class StudentController extends Controller
     public function destroy(Student $student)
     {
         $student = $this->studentService->delete($student);
+        return redirect()->route('admin.student.index');
+    }
+
+
+    public function import(Request $request)
+    {
+        Excel::import(new StudentsImport, $request->file);
         return redirect()->route('admin.student.index');
     }
 }
