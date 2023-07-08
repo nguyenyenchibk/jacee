@@ -10,6 +10,7 @@ use App\Http\Controllers\Teacher\QuestionController;
 use App\Http\Controllers\Teacher\FileController;
 use App\Http\Controllers\Teacher\DiscussionController;
 use App\Http\Controllers\Teacher\CommentController;
+use App\Http\Controllers\Teacher\ChartController;
 
 Route::prefix('teacher')->middleware('theme:teacher')->name('teacher.')->group(function(){
     Route::middleware(['guest:teacher'])->group(function(){
@@ -43,6 +44,10 @@ Route::prefix('teacher')->middleware('theme:teacher')->name('teacher.')->group(f
             Route::post('{course}/{lesson}/{discussion}/comment', 'store')->name('store');
         });
         Route::controller(QuestionController::class)->prefix('tests')->name('question.')->group(function () {
+            Route::post('{test}/questions', 'store')->name('store');
+            Route::get('questions/{question}/show', 'show')->name('show');
+        });
+        Route::controller(ChartController::class)->prefix('courses')->name('question.')->group(function () {
             Route::post('{test}/questions', 'store')->name('store');
             Route::get('questions/{question}/show', 'show')->name('show');
         });

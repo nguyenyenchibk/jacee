@@ -22,6 +22,7 @@ Route::prefix('admin')->middleware('theme:admin')->name('admin.')->group(functio
             Route::get('{teacher}/edit', 'edit')->name('edit');
             Route::put('{teacher}', 'update')->name('update');
             Route::delete('{teacher}', 'destroy')->name('delete');
+            Route::post('/import', 'import')->name('import');
         });
 
         Route::controller(StudentController::class)->prefix('students')->name('student.')->group(function () {
@@ -31,6 +32,7 @@ Route::prefix('admin')->middleware('theme:admin')->name('admin.')->group(functio
             Route::get('{student}/edit', 'edit')->name('edit');
             Route::put('{student}', 'update')->name('update');
             Route::delete('{student}', 'destroy')->name('delete');
+            Route::post('/import', 'import')->name('import');
         });
 
         Route::controller(CategoryController::class)->prefix('categories')->name('category.')->group(function () {

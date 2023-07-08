@@ -7,6 +7,9 @@ use App\Models\Teacher;
 use App\Services\Interfaces\TeacherServiceInterface;
 use App\Http\Requests\Admin\Teacher\TeacherRequest;
 use App\Http\Requests\Admin\Teacher\UpdateTeacherRequest;
+use App\Imports\TeachersImport;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Http\Request;
 
 class TeacherController extends Controller
 {
@@ -73,6 +76,12 @@ class TeacherController extends Controller
     public function destroy(Teacher $teacher)
     {
         $teacher = $this->teacherService->delete($teacher);
+        return redirect()->route('admin.teacher.index');
+    }
+
+    public function import(Request $request)
+    {
+        Excel::import(new TeachersImport, $request->file);
         return redirect()->route('admin.teacher.index');
     }
 }
