@@ -23,4 +23,10 @@ class FileController extends Controller
         $this->fileService->create($lesson, $request);
         return redirect()->route('teacher.lesson.show', compact('course', 'lesson'));
     }
+
+    public function uploadVideo(Course $course, Lesson $lesson, Request $request)
+    {
+        $this->fileService->uploadVideo($lesson, $request);
+        return redirect()->route('teacher.lesson.show', compact('course', 'lesson'));
+    }
 }

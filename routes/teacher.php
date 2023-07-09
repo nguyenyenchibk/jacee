@@ -36,6 +36,7 @@ Route::prefix('teacher')->middleware('theme:teacher')->name('teacher.')->group(f
         });
         Route::controller(FileController::class)->prefix('lessons')->name('file.')->group(function () {
             Route::post('{course}/{lesson}/file', 'store')->name('store');
+            Route::post('{course}/{lesson}/uploadVideo', 'uploadVideo')->name('uploadVideo');
         });
         Route::controller(DiscussionController::class)->prefix('lessons')->name('discussion.')->group(function () {
             Route::post('{course}/{lesson}/discussion', 'store')->name('store');

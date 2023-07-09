@@ -62,8 +62,9 @@ class LessonController extends Controller
     {
         $tests = $this->lessonService->getTestOfLesson($lesson);
         $files = $this->fileService->index($lesson);
+        $videos = $this->fileService->indexVideo($lesson);
         $discussions = $this->discussionService->index($lesson);
-        return view('teacher.lesson.show', compact('course', 'lesson', 'tests', 'files', 'discussions'));
+        return view('teacher.lesson.show', compact('course', 'lesson', 'tests', 'files', 'discussions', 'videos'));
     }
 
     /**
