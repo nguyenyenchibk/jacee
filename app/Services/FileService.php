@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use App\Models\Lesson;
 use App\Models\File;
 use Illuminate\Support\Facades\Storage;
-
 class FileService extends Service implements FileServiceInterface
 {
     public function index(Lesson $lesson)
@@ -37,11 +36,6 @@ class FileService extends Service implements FileServiceInterface
         $path = Storage::disk('s3')->put($filePath, file_get_contents($request->file));
         $path = Storage::disk('s3')->url($path);
 
-        $file = $lesson->files()->create([
-            'name' => '/'.'lessons/'.$lesson->id.'/'.$fileName,
-            'url' => $path.'/'.'lessons/'.$lesson->id.'/'.$fileName
-        ]);
-
         return back()
             ->with('success','File has been successfully uploaded.');
     }
@@ -50,5 +44,23 @@ class FileService extends Service implements FileServiceInterface
     {
         Storage::disk('s3')->delete($file);
         return true;
+    }
+
+    public function uploadVideo(Lesson $lesson, Request $request)
+    {
+        $input = $request->validate([
+            'url' => 'required',
+        ]);
+        $file = $lesson->files()->create([
+            'name' => 'lessons/'.$lesson->id.'/video',
+            'url' => $input['url'],
+        ]);
+        return $file;
+    }
+
+    public function indexVideo(Lesson $lesson)
+    {
+        $url = $lesson->files()->get('url');
+        return $url;
     }
 }

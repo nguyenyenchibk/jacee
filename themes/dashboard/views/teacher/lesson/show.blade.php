@@ -63,6 +63,9 @@
                                     </div>
                                 </div>
                                 @endforeach
+                                @foreach($videos as $video)
+                                {!! $video->url !!}
+                                @endforeach
                                 @foreach ($tests as $test)
                                 <div class="card mt-3">
                                     <div class="card-header">
@@ -183,33 +186,23 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    @foreach ($files as $file)
-                    <div class="card" style="width: 36rem;">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <a href="{{ Storage::disk('s3')->url($file['downloadUrl']) }}">{{ $file['name']
-                                        }}</a>
-                                </div>
-                                <div class="col-md-2">
-                                    <form action="#" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">
-                                            {{ __('X') }}
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
                     <form action="{{ route('teacher.file.store', [$course, $lesson]) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-10">
                                 <input type="file" name="file" class="form-control" />
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-success">Upload File...</button>
+                            </div>
+                        </div>
+                    </form>
+                    <form action="{{ route('teacher.file.uploadVideo', [$course, $lesson]) }}" method="POST">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-10">
+                                <input type="text" name="url" class="form-control" />
                             </div>
                             <div class="col-md-2">
                                 <button type="submit" class="btn btn-success">Upload File...</button>
