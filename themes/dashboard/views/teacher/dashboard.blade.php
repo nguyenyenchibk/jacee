@@ -20,74 +20,96 @@
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
-    <!-- /.content-header -->
-
-    <!-- /.content-header -->
-
-    <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
             <div class="row">
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
-                    <div class="small-box bg-info">
+                    <div class="small-box border border-info">
                         <div class="inner">
-                            <h3>1</h3>
+                            <h3>{{ $total_student }}</h3>
 
-                            <p>Total students</p>
+                            <p>Total Students</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
                         </div>
                     </div>
                 </div>
-                <!-- ./col -->
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
-                    <div class="small-box bg-success">
+                    <div class="small-box border border-warning">
                         <div class="inner">
-                            <h3>1</h3>
+                            <h3>{{ $total_course }}</h3>
 
-                            <p>Total admins</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-person-add"></i>
-
-                        </div>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-warning">
-                        <div class="inner">
-                            <h3>1</h3>
-
-                            <p>Exams</p>
+                            <p>Total Courses</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
                         </div>
                     </div>
                 </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-danger">
-                        <div class="inner">
-                            <h3>65</h3>
-
-                            <p>Unique Visitors</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-pie-graph"></i>
-                        </div>
-                    </div>
-                </div>
-                <!-- ./col -->
             </div>
             <!-- /.content -->
+            <form action="">
+                <div class="row">
+                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" type="search" name="course_id">
+                        <option selected>Select Course</option>
+                        @foreach($courses as $course)
+                        <option value="{{ $course->id }}">{{ $course->code }}</option>
+                        @endforeach
+                    </select>
+                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" type="search" name="time">
+                        <option selected>Select Time</option>
+                        <option value="{{ $now }}">{{ $now->format('Y-m') }}</option>
+                        <option value="{{ $lastMonth }}">{{ $lastMonth->format('Y-m') }}</option>
+                        <option value="{{ $last2Month }}">{{ $last2Month->format('Y-m') }}</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    {{ __('Search') }}
+                </button>
+            </form>
         </div>
         <!-- /.content-wrapper -->
+        <canvas id="canvas" height="280" width="600"></canvas>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+        <script>
+            var labels = <?php echo $labels; ?>;
+            var averages = <?php echo $averages; ?>;
+            var barChartData =
+            {
+                labels: labels,
+                datasets: [{
+                    label: 'Point',
+                    backgroundColor: "#DFE9F1",
+                    data: averages
+                }]
+            };
+
+            window.onload = function()
+            {
+                var ctx = document.getElementById("canvas").getContext("2d");
+                window.myBar = new Chart(ctx,
+                {
+                    type: 'bar',
+                    data: barChartData,
+                    options: {
+                        elements: {
+                            rectangle: {
+                                borderWidth: 2,
+                                borderColor: '#87AACA',
+                                borderSkipped: 'bottom'
+                            }
+                        },
+                        responsive: true,
+                        title: {
+                            display: true,
+                            text: 'Yearly User Joined'
+                        }
+                    }
+                });
+            };
+        </script>
         @endsection

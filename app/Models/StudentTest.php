@@ -15,5 +15,6 @@ class StudentTest extends Model
         'test_id',
         'student_id',
         'score',
+        'average'
     ];
 }

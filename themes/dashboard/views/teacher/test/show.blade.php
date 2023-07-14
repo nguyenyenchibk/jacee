@@ -59,6 +59,23 @@
                                             data-target="#myModal">Add question</a>
                                     </div>
                                 </form>
+                                @foreach($questions as $question)
+                                    <div class="card @if(!$loop->last)mb-3 @endif">
+                                        <div class="card-header">{{ $question->question }}</div>
+                                        <div class="card-body">
+                                            @foreach($question->answers as $answer)
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio"
+                                                    name="questions[{{ $question->id }}]" id="answer-{{ $answer->id }}"
+                                                    value="{{ $answer->id }}" disabled>
+                                                <label class="form-check-label" for="answer-{{ $answer->id }}">
+                                                    {{ $answer->answer }}
+                                                </label>
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>

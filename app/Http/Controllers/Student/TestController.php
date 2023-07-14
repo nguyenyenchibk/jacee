@@ -51,7 +51,8 @@ class TestController extends Controller
         StudentTest::create([
             'test_id' => $test->id,
             'student_id' => auth()->guard('student')->user()->id,
-            'score' => $score
+            'score' => $score,
+            'average' => ($score / $test->max_score) * 100
         ]);
         return redirect()->route('student.test.result', compact('test'));
     }

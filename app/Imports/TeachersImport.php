@@ -30,7 +30,7 @@ class TeachersImport implements ToModel
         return [
             'name' => 'required|max:255',
             'email' => 'required|email|unique:students|max:255',
-            "password" => 'required|confirmed|min:8',
+            'password' => 'required|confirmed|min:8',
             'status' => 'required|integer'
         ];
     }
