@@ -21,6 +21,7 @@ class QuestionService extends Service implements QuestionServiceInterface
         $input = $request->validate();
         $question = $test->questions()->create($input);
         $question->answers()->createMany($input['answers'])->push();
+        $test->update(['max_score' => $test->max_score + $input['score']]);
         return $question;
     }
 }

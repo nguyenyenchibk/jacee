@@ -18,6 +18,7 @@ class CreateStudentTestTable extends Migration
             $table->integer('test_id');
             $table->integer('student_id');
             $table->integer('score');
+            $table->integer('average');
             $table->timestamps();
             $table->softDeletes();
         });

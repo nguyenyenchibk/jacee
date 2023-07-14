@@ -9,13 +9,16 @@ use App\Models\Course;
 use Illuminate\Http\Request;
 use App\Http\Requests\Teacher\Test\TestRequest;
 use App\Services\Interfaces\TestServiceInterface;
+use App\Services\Interfaces\QuestionServiceInterface;
 class TestController extends Controller
 {
     protected $testService;
+    protected $questionService;
 
-    public function __construct(TestServiceInterface $testService)
+    public function __construct(TestServiceInterface $testService, QuestionServiceInterface $questionService)
     {
         $this->testService = $testService;
+        $this->questionService = $questionService;
     }
     /**
      * Display a listing of the resource.
@@ -57,7 +60,8 @@ class TestController extends Controller
      */
     public function show(Test $test)
     {
-        return view('teacher.test.show', compact('test'));
+        $questions = $this->questionService->index($test);
+        return view('teacher.test.show', compact('test', 'questions'));
     }
 
     /**

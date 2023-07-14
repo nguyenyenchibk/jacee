@@ -18,7 +18,7 @@ Route::prefix('teacher')->middleware('theme:teacher')->name('teacher.')->group(f
         Route::post('/login', [AuthenticatedSessionController::class, 'store']);
     });
     Route::middleware(['auth:teacher'])->middleware('theme:dashboard')->group(function(){
-        Route::get('/dashboard',[TeacherController::class,'index']);
+        Route::get('/dashboard',[TeacherController::class,'index'])->name('dashboard');
         Route::controller(CourseController::class)->prefix('courses')->name('course.')->group(function () {
             Route::get('/', 'teacherGetCourse')->name('index');
             Route::get('{course}/show', 'show')->name('show');
@@ -45,10 +45,6 @@ Route::prefix('teacher')->middleware('theme:teacher')->name('teacher.')->group(f
             Route::post('{course}/{lesson}/{discussion}/comment', 'store')->name('store');
         });
         Route::controller(QuestionController::class)->prefix('tests')->name('question.')->group(function () {
-            Route::post('{test}/questions', 'store')->name('store');
-            Route::get('questions/{question}/show', 'show')->name('show');
-        });
-        Route::controller(ChartController::class)->prefix('courses')->name('question.')->group(function () {
             Route::post('{test}/questions', 'store')->name('store');
             Route::get('questions/{question}/show', 'show')->name('show');
         });

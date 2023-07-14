@@ -31,11 +31,11 @@
             <div class="row">
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
-                    <div class="small-box bg-info">
+                    <div class="small-box border border-info">
                         <div class="inner">
                             <h3>44</h3>
 
-                            <p>Total students</p>
+                            <p>Students</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
@@ -45,11 +45,11 @@
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
-                    <div class="small-box bg-success">
+                    <div class="small-box border border-success">
                         <div class="inner">
                             <h3>33</h3>
 
-                            <p>Total admins</p>
+                            <p>Teachers</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
@@ -60,11 +60,11 @@
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
-                    <div class="small-box bg-warning">
+                    <div class="small-box border border-warning">
                         <div class="inner">
                             <h3>22</h3>
 
-                            <p>Exams</p>
+                            <p>Courses</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
@@ -74,11 +74,11 @@
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
-                    <div class="small-box bg-danger">
+                    <div class="small-box border border-primary">
                         <div class="inner">
                             <h3>65</h3>
 
-                            <p>Unique Visitors</p>
+                            <p>Categories</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-pie-graph"></i>

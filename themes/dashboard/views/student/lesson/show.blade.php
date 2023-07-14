@@ -46,6 +46,21 @@
                                         </div>
                                     </div>
                                 </form>
+                                @foreach ($files as $file)
+                                <div class="card" style="width: 36rem;">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <a href="{{ Storage::disk('s3')->url($file['downloadUrl']) }}">{{
+                                                    $file['name'] }}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                                @foreach($videos as $video)
+                                {!! $video->url !!}
+                                @endforeach
                                 @foreach ($tests as $test)
                                 <div class="card mt-3">
                                     <div class="card-header">
@@ -142,7 +157,7 @@
                                                 class="form-control @error('content') is-invalid @enderror"
                                                 name="content" value="{{ old('content') }}" required
                                                 autocomplete="content" autofocus>
-                                            <button class="btn btn-outline-secondary" type="submit">Comment</button>
+                                            <button class="btn btn-outline-secondary" type="submit">Discussion</button>
                                         </div>
                                     </div>
                                 </form>

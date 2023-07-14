@@ -122,7 +122,7 @@
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-warning">
                                         {{ __('Add') }}
                                     </button>
                                 </div>

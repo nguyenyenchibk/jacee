@@ -122,8 +122,7 @@
                                                                     class="d-flex justify-content-between align-items-center">
                                                                     <p class="mb-1">
                                                                         {{ $comment->author }} <span
-                                                                            class="small text-secondary"> 4
-                                                                            hours ago</span>
+                                                                            class="small text-secondary">{{ $comment->created_at }}</span>
                                                                     </p>
                                                                 </div>
                                                                 <p class="small mb-0">
@@ -186,6 +185,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
+                    <label for="">Add Document</label>
                     <form action="{{ route('teacher.file.store', [$course, $lesson]) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
@@ -198,14 +198,15 @@
                             </div>
                         </div>
                     </form>
+                    <label for="">Add Video</label>
                     <form action="{{ route('teacher.file.uploadVideo', [$course, $lesson]) }}" method="POST">
                         @csrf
                         <div class="row">
                             <div class="col-md-10">
-                                <input type="text" name="url" class="form-control" />
+                                <input type="text" name="url" class="form-control" placeholder="Link youtube video"/>
                             </div>
                             <div class="col-md-2">
-                                <button type="submit" class="btn btn-success">Upload File...</button>
+                                <button type="submit" class="btn btn-success">Add Link</button>
                             </div>
                         </div>
                     </form>
