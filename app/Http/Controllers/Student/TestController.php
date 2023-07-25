@@ -61,6 +61,7 @@ class TestController extends Controller
     {
         $results = Result::where('results.test_id', $test->id)->where('results.student_id', auth()->guard('student')->user()->id)->get();
         $questions = $this->questionService->index($test);
-        return view('student.result.show', compact('results', 'questions'));
+        $student_test = StudentTest::where('test_id', $test->id)->where('student_id', auth()->guard('student')->user()->id)->first()->pluck('score')->toArray();
+        return view('student.result.show', compact('results', 'questions', 'student_test', 'test'));
     }
 }

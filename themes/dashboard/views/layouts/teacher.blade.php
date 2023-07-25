@@ -46,6 +46,7 @@
 
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            @include('common.alert')
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -80,6 +81,7 @@
                         </form>
                     </div>
                 </li>
+                @yield('notifications')
             </ul>
         </nav>
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -163,4 +165,5 @@
     });
     </script>
 </body>
+
 </html>

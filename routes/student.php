@@ -8,14 +8,19 @@ use App\Http\Controllers\Student\LessonController;
 use App\Http\Controllers\Student\TestController;
 use App\Http\Controllers\Student\DiscussionController;
 use App\Http\Controllers\Student\CommentController;
+use App\Http\Controllers\Student\ForgotPasswordController;
 
-Route::prefix('student')->middleware('theme:student')->name('student.')->group(function(){
-    Route::middleware(['guest:student'])->group(function(){
-        Route::view('/login','auth.login')->name('login');
+Route::prefix('student')->middleware('theme:student')->name('student.')->group(function () {
+    Route::middleware(['guest:student'])->group(function () {
+        Route::view('/login', 'auth.login')->name('login');
         Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+        Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
+        Route::post('forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post');
+        Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
+        Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
     });
-    Route::middleware(['auth:student'])->middleware('theme:dashboard')->group(function(){
-        Route::get('/dashboard',[StudentController::class,'index']);
+    Route::middleware(['auth:student'])->middleware('theme:dashboard')->group(function () {
+        Route::get('/dashboard', [StudentController::class, 'index']);
         Route::controller(CourseController::class)->prefix('courses')->name('course.')->group(function () {
             Route::get('/', 'getCourseOfStudent')->name('index');
             Route::get('{course}/show', 'show')->name('show');
@@ -37,5 +42,3 @@ Route::prefix('student')->middleware('theme:student')->name('student.')->group(f
         Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
     });
 });
-
-

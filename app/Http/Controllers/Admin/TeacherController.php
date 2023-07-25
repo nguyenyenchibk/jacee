@@ -81,7 +81,7 @@ class TeacherController extends Controller
 
     public function import(Request $request)
     {
-        Excel::import(new TeachersImport, $request->file);
-        return redirect()->route('admin.teacher.index')->with('success', 'Import Excel file successfully.');
+        Excel::import(new TeachersImport, $request->file('file'));
+        return redirect()->route('admin.teacher.index')->with('success', 'Teacher Import by Excel file successfully.');
     }
 }

@@ -43,9 +43,9 @@ class CourseUpdate extends Command
         foreach($courses as $course)
         {
             $ended_at = Carbon::createFromFormat('Y-m-d', $course->ended_at);
-            if($ended_at->gte(Carbon::now()->format('Y-m-d')))
+            if($ended_at->lte(Carbon::now()->format('Y-m-d')))
             {
-                $course->update(['status', 0]);
+                $course->update(['status' => 0]);
             }
         }
         return true;
