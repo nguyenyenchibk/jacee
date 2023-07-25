@@ -8,6 +8,7 @@ class StudentController extends Controller
 {
     public function index()
     {
-        return view('student.dashboard');
+        $notifications = auth()->guard('student')->user()->unreadNotifications;
+        return view('student.dashboard', compact('notifications'));
     }
 }

@@ -46,6 +46,10 @@
                                         <div class="col-sm-2">
                                             <p class="form-control-plaintext" id="time">{{ $test->time }}</p>
                                         </div>
+                                        <label for="time" class="col-form-label">Max Score:</label>
+                                        <div class="col-sm-2">
+                                            <p class="form-control-plaintext" id="time">{{ $test->max_score }}</p>
+                                        </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="description" class="col-md-1 col-form-label">Description:</label>

@@ -9,7 +9,6 @@ use App\Http\Requests\Admin\Course\CourseRequest;
 use App\Http\Requests\Admin\Course\UpdateCourseRequest;
 use App\Services\Interfaces\TeacherServiceInterface;
 use App\Services\Interfaces\CategoryServiceInterface;
-
 class CourseController extends Controller
 {
     protected $courseService;

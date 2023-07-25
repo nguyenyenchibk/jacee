@@ -24,7 +24,7 @@ class StudentController extends Controller
 
     public function index()
     {
-        $students = $this->studentService->index();
+        $students = $this->studentService->getActiveAccounts();
         return view('admin.student.index', compact('students'));
     }
 
@@ -42,7 +42,7 @@ class StudentController extends Controller
     public function store(StudentRequest $request)
     {
         $this->studentService->create($request);
-        return redirect()->route('admin.student.index');
+        return redirect()->route('admin.student.index')->with('success', 'Student Created successfully.');
     }
 
     /**
@@ -67,7 +67,7 @@ class StudentController extends Controller
     public function update(UpdateStudentRequest $request, Student $student)
     {
         $student = $this->studentService->update($request, $student);
-        return redirect()->route('admin.student.index');
+        return redirect()->route('admin.student.index')->with('success', 'Teacher Updated successfully.');
     }
 
     /**
@@ -76,13 +76,13 @@ class StudentController extends Controller
     public function destroy(Student $student)
     {
         $student = $this->studentService->delete($student);
-        return redirect()->route('admin.student.index');
+        return redirect()->route('admin.student.index')->with('success', 'Teacher Deleted successfully.');
     }
 
 
     public function import(Request $request)
     {
         Excel::import(new StudentsImport, $request->file);
-        return redirect()->route('admin.student.index');
+        return redirect()->route('admin.student.index')->with('success', 'Import Excel file successfully.');
     }
 }

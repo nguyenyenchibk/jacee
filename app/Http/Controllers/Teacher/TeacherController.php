@@ -27,6 +27,7 @@ class TeacherController extends Controller
         $last2Month = Carbon::now()->subMonth(2);
         $labels = ['0-9', '10-19', '20-29', '30-39', '40-49', '50-59', '60-69' , '70-79', '80-89', '90-99', '100'];
         $averages = array(0,0,0,0,0,0,0,0,0,0,0);
+        $noti = [];
         if ($request['course_id'] && $request['time']) {
             $students = DB::table('student_test')
                 ->leftJoin('course_student', 'student_test.student_id', '=', 'course_student.student_id')
@@ -81,7 +82,17 @@ class TeacherController extends Controller
                 }
             }
         }
-        return view('teacher.dashboard', compact('total_student', 'total_course', 'courses', 'now', 'lastMonth', 'last2Month'))
+        $notifications = auth()->guard('teacher')->user()->unreadNotifications;
+        return view('teacher.dashboard', compact('total_student', 'total_course', 'courses', 'now', 'lastMonth', 'last2Month', 'notifications'))
             ->with('averages', json_encode($averages, JSON_NUMERIC_CHECK))->with('labels', json_encode($labels));;
+    }
+
+    public function markasread($id)
+    {
+        if($id)
+        {
+            auth()->guard('teacher')->user()->unreadNotifications->where('id', $id)->markAsRead();
+        }
+        return back();
     }
 }

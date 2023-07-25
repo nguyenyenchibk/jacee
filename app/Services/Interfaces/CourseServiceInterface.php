@@ -16,4 +16,5 @@ interface CourseServiceInterface extends ServiceInterface
     public function getLessonOfCourse(Course $course);
     public function addStudents(FormRequest $request, Course $course);
     public function getCourseOfStudent();
+    public function getParticipants(Course $course);
 }

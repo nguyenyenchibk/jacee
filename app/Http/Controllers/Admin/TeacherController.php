@@ -42,7 +42,7 @@ class TeacherController extends Controller
     public function store(TeacherRequest $request)
     {
         $this->teacherService->create($request);
-        return redirect()->route('admin.teacher.index');
+        return redirect()->route('admin.teacher.index')->with('success', 'Teacher Created successfully.');
     }
 
     /**
@@ -67,7 +67,7 @@ class TeacherController extends Controller
     public function update(UpdateTeacherRequest $request, Teacher $teacher)
     {
         $teacher = $this->teacherService->update($request, $teacher);
-        return redirect()->route('admin.teacher.index');
+        return redirect()->route('admin.teacher.index')->with('success', 'Teacher Updated successfully.');
     }
 
     /**
@@ -76,12 +76,12 @@ class TeacherController extends Controller
     public function destroy(Teacher $teacher)
     {
         $teacher = $this->teacherService->delete($teacher);
-        return redirect()->route('admin.teacher.index');
+        return redirect()->route('admin.teacher.index')->with('success', 'Teacher Deleted successfully.');
     }
 
     public function import(Request $request)
     {
-        Excel::import(new TeachersImport, $request->file);
-        return redirect()->route('admin.teacher.index');
+        Excel::import(new TeachersImport, $request->file('file'));
+        return redirect()->route('admin.teacher.index')->with('success', 'Teacher Import by Excel file successfully.');
     }
 }

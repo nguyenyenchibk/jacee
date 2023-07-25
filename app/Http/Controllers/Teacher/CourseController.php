@@ -28,8 +28,7 @@ class CourseController extends Controller
     public function show(Course $course)
     {
         $lessons = $this->courseService->getLessonOfCourse($course);
-        $students = $this->studentService->getActiveAccounts();
-        return view('teacher.course.show', compact('course', 'lessons', 'students'));
+        return view('teacher.course.show', compact('course', 'lessons'));
     }
 
     public function addStudents(Course $course)
@@ -40,6 +39,13 @@ class CourseController extends Controller
     public function storeStudents(Course $course, AddStudentRequest $request)
     {
         $this->courseService->addStudents($request, $course);
-        return redirect()->route('teacher.course.show', compact('course'));
+        return redirect()->route('teacher.course.participants', compact('course'))->with('success', 'Add Student to course successfully.');;
+    }
+
+    public function participants(Course $course)
+    {
+        $participants = $this->courseService->getParticipants($course);
+        $students = $this->studentService->getActiveAccounts();
+        return view('teacher.course.participants', compact('participants', 'course', 'students'));
     }
 }

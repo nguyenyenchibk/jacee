@@ -11,17 +11,24 @@ use App\Http\Controllers\Teacher\FileController;
 use App\Http\Controllers\Teacher\DiscussionController;
 use App\Http\Controllers\Teacher\CommentController;
 use App\Http\Controllers\Teacher\ChartController;
+use App\Http\Controllers\Teacher\ForgotPasswordController;
 
 Route::prefix('teacher')->middleware('theme:teacher')->name('teacher.')->group(function(){
     Route::middleware(['guest:teacher'])->group(function(){
         Route::view('/login','auth.login')->name('login');
         Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+        Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
+        Route::post('forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post');
+        Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
+        Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
     });
     Route::middleware(['auth:teacher'])->middleware('theme:dashboard')->group(function(){
         Route::get('/dashboard',[TeacherController::class,'index'])->name('dashboard');
+        Route::post('/markasread/{notification}',[TeacherController::class, 'markasread'])->name('markasread');
         Route::controller(CourseController::class)->prefix('courses')->name('course.')->group(function () {
             Route::get('/', 'teacherGetCourse')->name('index');
             Route::get('{course}/show', 'show')->name('show');
+            Route::get('{course}/participants', 'participants')->name('participants');
             Route::post('{course}/storeStudents', 'storeStudents')->name('storeStudents');
         });
         Route::controller(LessonController::class)->prefix('courses')->name('lesson.')->group(function () {

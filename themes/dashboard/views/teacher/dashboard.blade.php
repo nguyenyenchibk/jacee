@@ -1,5 +1,33 @@
 @extends('layouts.teacher')
 @section('title','Dashboard')
+
+@section('notifications')
+<a class="nav-link" data-toggle="dropdown" href="#">
+    <i class="far fa-bell"></i>
+    @if($notifications->count() > 0)
+    <span class="badge badge-danger navbar-badge">{{ $notifications->count() }}</span>
+    @else
+    <span class="badge badge-warning navbar-badge">0</span>
+    @endif
+</a>
+<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+    @foreach($notifications as $notification)
+    <div class="dropdown-divider"></div>
+    <a href="#" class="dropdown-item">
+        <form action="{{ route('teacher.markasread', $notification->id)}}" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-danger btn-sm">
+                <i class="material-icons">You just took charge of {{ $notification->data['course_name']}}</i>
+            </button>
+        </form>
+        <span class="float-right text-muted text-sm">{{ $notification->created_at }}</span>
+    </a>
+    @endforeach
+    <div class="dropdown-divider"></div>
+    <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+</div>
+@overwrite
+
 @section('content')
 
 <!-- Content Wrapper. Contains page content -->
@@ -20,7 +48,7 @@
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
-    <section class="content">
+    <div class="content">
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
             <div class="row">
@@ -54,13 +82,15 @@
             <!-- /.content -->
             <form action="">
                 <div class="row">
-                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" type="search" name="course_id">
+                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" type="search"
+                        name="course_id">
                         <option selected>Select Course</option>
                         @foreach($courses as $course)
                         <option value="{{ $course->id }}">{{ $course->code }}</option>
                         @endforeach
                     </select>
-                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" type="search" name="time">
+                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" type="search"
+                        name="time">
                         <option selected>Select Time</option>
                         <option value="{{ $now }}">{{ $now->format('Y-m') }}</option>
                         <option value="{{ $lastMonth }}">{{ $lastMonth->format('Y-m') }}</option>

@@ -31,6 +31,16 @@
                                 </div>
                             </div>
                             <div class="card-body">
+                                <form class="mt-0">
+                                    <div class="form-group row">
+                                        <label for="name" class="col-md-1 col-form-label">Score:</label>
+                                        <div class="col-sm-2">
+                                            @foreach($student_test as $key => $value)
+                                                <p class="form-control-plaintext" id="name">{{ $value }} / {{ $test->max_score }}</p>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </form>
                                 <form>
                                     @foreach($questions as $question)
                                     <div class="card @if(!$loop->last)mb-3 @endif">
@@ -67,14 +77,6 @@
                                         </div>
                                     </div>
                                     @endforeach
-
-                                    {{-- <div class="form-group row mb-0">
-                                        <div class="col-md-6">
-                                            <button type="submit" class="btn btn-primary">
-                                                Submit
-                                            </button>
-                                        </div>
-                                    </div> --}}
                                 </form>
                             </div>
                         </div>
