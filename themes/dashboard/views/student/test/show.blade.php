@@ -27,7 +27,7 @@
                             <div class="card-header">
                                 <h3 class="card-title">Test</h3>
                                 <div class="card-tools">
-                                    <a href="#" class="btn btn-light">Cancel</a>
+                                    <a href="{{ route('student.lesson.show', [$course, $lesson])}}" class="btn btn-light">Cancel</a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -39,7 +39,7 @@
                                         </div>
                                     </div>
                                 </form>
-                                <form method="POST" action="{{ route('student.test.store', $test)}}">
+                                <form method="POST" action="{{ route('student.test.store', [$course, $lesson, $test])}}">
                                     @csrf
                                     @foreach($questions as $question)
                                     <div class="card @if(!$loop->last)mb-3 @endif">

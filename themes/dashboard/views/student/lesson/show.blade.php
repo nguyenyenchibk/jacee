@@ -69,7 +69,7 @@
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $test->name }}</h5>
                                         <p class="card-text"></p>
-                                        <a href="{{ route('student.test.show', $test) }}"
+                                        <a href="{{ route('student.test.show', [$course, $lesson, $test]) }}"
                                             class="btn btn-outline-primary">Start Test</a>
                                     </div>
                                 </div>

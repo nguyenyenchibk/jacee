@@ -101,7 +101,7 @@
                         data-accordion="false">
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('student.dashboard')}}" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard

@@ -80,26 +80,36 @@
                 </div>
             </div>
             <!-- /.content -->
-            <form action="">
-                <div class="row">
-                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" type="search"
-                        name="course_id">
-                        <option selected>Select Course</option>
-                        @foreach($courses as $course)
-                        <option value="{{ $course->id }}">{{ $course->code }}</option>
-                        @endforeach
-                    </select>
-                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" type="search"
-                        name="time">
-                        <option selected>Select Time</option>
-                        <option value="{{ $now }}">{{ $now->format('Y-m') }}</option>
-                        <option value="{{ $lastMonth }}">{{ $lastMonth->format('Y-m') }}</option>
-                        <option value="{{ $last2Month }}">{{ $last2Month->format('Y-m') }}</option>
-                    </select>
+            <form class="mt-0" action="">
+                <div class="form-group row">
+                    <label for="course" class="col-md-1 col-form-label">Select Course:</label>
+                    <div class="col-sm-2">
+                        <p class="form-control-plaintext" id="course">
+                            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
+                                type="search" name="course_id">
+                                <option selected>Open this select course</option>
+                                @foreach($courses as $course)
+                                <option value="{{ $course->id }}" required>{{ $course->code }} - {{ $course->name }}</option>
+                                @endforeach
+                            </select>
+                        </p>
+                    </div>
+                    <label for="time" class="col-form-label">Select Time:</label>
+                    <div class="col-sm-2">
+                        <p class="form-control-plaintext" id="time">
+                            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
+                                type="search" name="time">
+                                <option selected>Open this select time</option>
+                                <option value="{{ $now }}">{{ $now->format('Y-m') }}</option>
+                            </select>
+                        </p>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-outline-primary">
+                            {{ __('Search') }}
+                        </button>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary">
-                    {{ __('Search') }}
-                </button>
             </form>
         </div>
         <!-- /.content-wrapper -->
@@ -136,7 +146,7 @@
                         responsive: true,
                         title: {
                             display: true,
-                            text: 'Yearly User Joined'
+                            text: 'Monly Test Result'
                         }
                     }
                 });

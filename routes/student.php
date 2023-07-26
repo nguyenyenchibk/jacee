@@ -20,7 +20,7 @@ Route::prefix('student')->middleware('theme:student')->name('student.')->group(f
         Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
     });
     Route::middleware(['auth:student'])->middleware('theme:dashboard')->group(function () {
-        Route::get('/dashboard', [StudentController::class, 'index']);
+        Route::get('/dashboard', [StudentController::class, 'index'])->name('dashboard');
         Route::post('/markasread/{notification}',[StudentController::class, 'markasread'])->name('markasread');
         Route::controller(CourseController::class)->prefix('courses')->name('course.')->group(function () {
             Route::get('/', 'getCourseOfStudent')->name('index');
@@ -29,10 +29,10 @@ Route::prefix('student')->middleware('theme:student')->name('student.')->group(f
         Route::controller(LessonController::class)->prefix('courses')->name('lesson.')->group(function () {
             Route::get('{course}/lessons/{lesson}/show', 'show')->name('show');
         });
-        Route::controller(TestController::class)->prefix('lessons')->name('test.')->group(function () {
-            Route::get('tests/{test}/show', 'show')->name('show');
-            Route::post('tests/{test}', 'store')->name('store');
-            Route::get('tests/{test}/result', 'result')->name('result');
+        Route::controller(TestController::class)->prefix('courses')->name('test.')->group(function () {
+            Route::get('{course}/lessons/{lesson}/tests/{test}/show', 'show')->name('show');
+            Route::post('{course}/lessons/{lesson}/tests/{test}', 'store')->name('store');
+            Route::get('{course}/lessons/{lesson}/tests/{test}/result', 'result')->name('result');
         });
         Route::controller(DiscussionController::class)->prefix('lessons')->name('discussion.')->group(function () {
             Route::post('{course}/{lesson}/discussion', 'store')->name('store');

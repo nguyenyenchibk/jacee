@@ -30,7 +30,9 @@ class CourseService extends Service implements CourseServiceInterface
     public function update(FormRequest $request, Course $course)
     {
         $input = $request->validate();
+        $teacher = Teacher::where('id', $course->teacher_id)->first();
         $course = $course->update($input);
+        $teacher->notify(new AddTeacherToCourseNotification($teacher));
         return $course;
     }
 
@@ -61,10 +63,7 @@ class CourseService extends Service implements CourseServiceInterface
                             ->get();
         foreach ($notices as $notice)
         {
-            if($notice->unreadNotifications->count() == 0)
-            {
-                $notice->notify(new AddStudentToCourseNotification($notice));
-            }
+            $notice->notify(new AddStudentToCourseNotification($notice));
         }
         return $student;
     }

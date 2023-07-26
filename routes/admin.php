@@ -6,7 +6,7 @@ use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CourseController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\AdminController;
 
 Route::prefix('admin')->middleware('theme:admin')->name('admin.')->group(function(){
     Route::middleware(['guest:admin'])->group(function(){

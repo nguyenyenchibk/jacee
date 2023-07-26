@@ -27,7 +27,7 @@
                             <div class="card-header">
                                 <h3 class="card-title">Result</h3>
                                 <div class="card-tools">
-                                    <a href="#" class="btn btn-light">Cancel</a>
+                                    <a href="{{ route('student.lesson.show', [$course, $lesson])}}" class="btn btn-light">Cancel</a>
                                 </div>
                             </div>
                             <div class="card-body">
