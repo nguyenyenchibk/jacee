@@ -10,6 +10,7 @@ use App\Notifications\AddTeacherToCourseNotification;
 use App\Notifications\AddStudentToCourseNotification;
 use App\Models\Teacher;
 use App\Models\Student;
+use App\Models\CourseStudent;
 class CourseService extends Service implements CourseServiceInterface
 {
     public function index()
@@ -76,8 +77,10 @@ class CourseService extends Service implements CourseServiceInterface
 
     public function getParticipants(Course $course)
     {
-        $paticipants = Student::leftJoin('course_student', 'students.id', '=', 'course_student.student_id')
-                                ->where('course_student.course_id', $course->id)->get();
+        $paticipants = CourseStudent::leftJoin('students', 'students.id', '=', 'course_student.student_id')
+                                ->where('course_student.course_id', $course->id)
+                                ->orderBy('course_student.id', 'desc')
+                                ->get();
         return $paticipants;
     }
 }

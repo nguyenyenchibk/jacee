@@ -36,7 +36,7 @@ class TeacherController extends Controller
                 ->whereYear('student_test.created_at', $year)
                 ->pluck('average');
             foreach ($students as $key => $value) {
-                if ($value != NULL && $value < 10) {
+                if ($value >= 0 && $value < 10) {
                     $averages[0]++;
                 } elseif ($value >= 10 && $value < 20) {
                     $averages[1]++;

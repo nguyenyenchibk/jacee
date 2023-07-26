@@ -99,8 +99,7 @@
                         <p class="form-control-plaintext" id="time">
                             <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
                                 type="search" name="time">
-                                <option selected>Open this select time</option>
-                                <option value="{{ $now }}">{{ $now->format('Y-m') }}</option>
+                                <option value="{{ $now }}" selected>{{ $now->format('Y-m') }}</option>
                             </select>
                         </p>
                     </div>

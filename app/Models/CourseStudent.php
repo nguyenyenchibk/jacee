@@ -10,4 +10,5 @@ class CourseStudent extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $table = 'course_student';
 }
