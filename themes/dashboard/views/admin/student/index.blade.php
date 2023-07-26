@@ -17,7 +17,19 @@
                 </div>
             </div>
         </div>
-
+        @if (count($errors) > 0)
+        <div class="row">
+            <div class="col-md-8 col-md-offset-1">
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                    @foreach($errors->all() as $error)
+                    {{ $error }} <br>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+        @endif
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
