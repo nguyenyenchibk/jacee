@@ -21,6 +21,7 @@ Route::prefix('student')->middleware('theme:student')->name('student.')->group(f
     });
     Route::middleware(['auth:student'])->middleware('theme:dashboard')->group(function () {
         Route::get('/dashboard', [StudentController::class, 'index']);
+        Route::post('/markasread/{notification}',[StudentController::class, 'markasread'])->name('markasread');
         Route::controller(CourseController::class)->prefix('courses')->name('course.')->group(function () {
             Route::get('/', 'getCourseOfStudent')->name('index');
             Route::get('{course}/show', 'show')->name('show');
