@@ -20,20 +20,13 @@
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
-    <!-- /.content-header -->
-
-    <!-- /.content-header -->
-
-    <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            <!-- Small boxes (Stat box) -->
             <div class="row">
                 <div class="col-lg-3 col-6">
-                    <!-- small box -->
                     <div class="small-box border border-info">
                         <div class="inner">
-                            <h3>44</h3>
+                            <h3>{{ $students->count() }}</h3>
 
                             <p>Students</p>
                         </div>
@@ -47,7 +40,7 @@
                     <!-- small box -->
                     <div class="small-box border border-success">
                         <div class="inner">
-                            <h3>33</h3>
+                            <h3>{{ $teachers->count() }}</h3>
 
                             <p>Teachers</p>
                         </div>
@@ -62,7 +55,7 @@
                     <!-- small box -->
                     <div class="small-box border border-warning">
                         <div class="inner">
-                            <h3>22</h3>
+                            <h3>{{ $courses->count() }}</h3>
 
                             <p>Courses</p>
                         </div>
@@ -73,10 +66,9 @@
                 </div>
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
-                    <!-- small box -->
                     <div class="small-box border border-primary">
                         <div class="inner">
-                            <h3>65</h3>
+                            <h3>{{ $categories->count() }}</h3>
 
                             <p>Categories</p>
                         </div>
@@ -89,5 +81,4 @@
             </div>
             <!-- /.content -->
         </div>
-        <!-- /.content-wrapper -->
         @endsection
