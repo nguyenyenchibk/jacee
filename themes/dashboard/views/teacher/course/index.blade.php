@@ -40,6 +40,9 @@
                                         <div class="card-footer">
                                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                                                 <a class="btn btn-outline-primary" href="{{ route('teacher.course.show', $course->id) }}" role="button">Show</a>
+                                                @if($course->status == 0)
+                                                    <button type="button" class="btn btn-warining" disabled>Outed Date !</button>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

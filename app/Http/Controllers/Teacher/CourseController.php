@@ -39,7 +39,7 @@ class CourseController extends Controller
     public function storeStudents(Course $course, AddStudentRequest $request)
     {
         $this->courseService->addStudents($request, $course);
-        return redirect()->route('teacher.course.participants', compact('course'))->with('success', 'Add Student to course successfully.');;
+        return redirect()->route('teacher.course.participants', compact('course'))->with('success', 'Add Student to course successfully.');
     }
 
     public function participants(Course $course)

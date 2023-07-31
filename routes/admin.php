@@ -41,7 +41,7 @@ Route::prefix('admin')->middleware('theme:admin')->name('admin.')->group(functio
             Route::post('/', 'store')->name('store');
             Route::get('{category}/edit', 'edit')->name('edit');
             Route::put('{category}', 'update')->name('update');
-            Route::delete('{category}', 'destroy')->name('delete');
+            // Route::delete('{category}', 'destroy')->name('delete');
         });
 
         Route::controller(CourseController::class)->prefix('courses')->name('course.')->group(function () {
@@ -50,7 +50,7 @@ Route::prefix('admin')->middleware('theme:admin')->name('admin.')->group(functio
             Route::post('/', 'store')->name('store');
             Route::get('{course}/edit', 'edit')->name('edit');
             Route::put('{course}', 'update')->name('update');
-            Route::delete('{course}', 'destroy')->name('delete');
+            // Route::delete('{course}', 'destroy')->name('delete');
         });
 
         Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');

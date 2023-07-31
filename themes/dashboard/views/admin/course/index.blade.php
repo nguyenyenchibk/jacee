@@ -41,13 +41,16 @@
                                         <div class="card-footer">
                                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                                                 <a class="btn btn-primary" href="{{ route('admin.course.edit', $course->id) }}">Edit</a>
-                                                <form id="delete-confirm" action="{{ route('admin.course.delete', $course->id )}}" method="POST">
+                                                {{-- <form id="delete-confirm" action="{{ route('admin.course.delete', $course->id )}}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger show_confirm" data-toggle="tooltip" title='Delete'>
                                                         {{ __('Delete') }}
                                                     </button>
-                                                </form>
+                                                </form> --}}
+                                                @if($course->status == 0)
+                                                    <button type="button" class="btn btn-warining" disabled>Outed Date !</button>
+                                                @endif
                                               </div>
                                         </div>
                                     </div>
@@ -61,24 +64,4 @@
     </div>
     </section>
 </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
-        <script type="text/javascript">
-            $('.show_confirm').click(function(event) {
-          var form =  $(this).closest("form");
-          var name = $(this).data("name");
-          event.preventDefault();
-          swal({
-              title: `Are you sure you want to delete this record?`,
-              text: "If you delete this, it will be gone forever.",
-              icon: "warning",
-              buttons: true,
-              dangerMode: true,
-          })
-          .then((willDelete) => {
-            if (willDelete) {
-              form.submit();
-            }
-          });
-        });
-        </script>
     @endsection

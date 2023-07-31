@@ -70,9 +70,9 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
-    {
-        $category = $this->categoryService->delete($category);
-        return redirect()->route('admin.category.index');
-    }
+    // public function destroy(Category $category)
+    // {
+    //     $category = $this->categoryService->delete($category);
+    //     return redirect()->route('admin.category.index');
+    // }
 }

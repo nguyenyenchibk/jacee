@@ -46,7 +46,7 @@ class QuestionController extends Controller
     public function store(Test $test, QuestionRequest $request)
     {
         $this->questionService->create($test, $request);
-        return redirect()->route('teacher.test.show', compact('test'));
+        return redirect()->route('teacher.test.show', compact('test'))->with('success', 'Create new question to course successfully.');;
     }
 
     /**

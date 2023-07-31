@@ -49,7 +49,7 @@ class TestController extends Controller
     public function store(Course $course, Lesson $lesson, TestRequest $request)
     {
         $this->testService->create($lesson, $request);
-        return redirect()->route('teacher.lesson.show', compact('course', 'lesson'));
+        return redirect()->route('teacher.lesson.show', compact('course', 'lesson'))->with('success', 'Upload a new test to course successfully.');;
     }
 
     /**

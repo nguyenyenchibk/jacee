@@ -47,6 +47,7 @@
 
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            @include('common.alert')
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">

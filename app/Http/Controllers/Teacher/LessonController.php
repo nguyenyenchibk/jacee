@@ -49,7 +49,7 @@ class LessonController extends Controller
     public function store(Course $course, LessonRequest $request)
     {
         $this->lessonService->create($course, $request);
-        return redirect()->route('teacher.course.show', compact('course'));
+        return redirect()->route('teacher.course.show', compact('course'))->with('success', 'Create new lesson to course successfully.');
     }
 
     /**

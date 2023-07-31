@@ -99,9 +99,9 @@ class CourseController extends Controller
      * @param  \App\Models\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Course $course)
-    {
-        $course = $this->courseService->delete($course);
-        return redirect()->route('admin.course.index');
-    }
+    // public function destroy(Course $course)
+    // {
+    //     $course = $this->courseService->delete($course);
+    //     return redirect()->route('admin.course.index');
+    // }
 }
