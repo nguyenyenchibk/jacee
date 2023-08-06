@@ -27,7 +27,7 @@ class FileService extends Service implements FileServiceInterface
     public function create(Lesson $lesson, Request $request)
     {
         $request->validate([
-            'file' => 'required|mimes:doc,csv,txt,pdf|max:2048',
+            'file' => 'required|mimes:doc,csv,txt,pdf|max:20480',
         ]);
 
         $fileName = $request->file->getClientOriginalName();

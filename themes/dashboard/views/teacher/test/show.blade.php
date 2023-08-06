@@ -27,8 +27,7 @@
                             <div class="card-header">
                                 <h3 class="card-title">Test Information</h3>
                                 <div class="card-tools">
-                                    <a href="#"
-                                        class="btn btn-light">Cancel</a>
+                                    <a href="#" class="btn btn-light">Cancel</a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -40,7 +39,8 @@
                                         </div>
                                         <label for="validate_date" class="col-form-label">Deadline:</label>
                                         <div class="col-sm-2">
-                                            <p class="form-control-plaintext" id="validate_date">{{ $test->validate_date }}</p>
+                                            <p class="form-control-plaintext" id="validate_date">{{ $test->validate_date
+                                                }}</p>
                                         </div>
                                         <label for="time" class="col-form-label">Interval:</label>
                                         <div class="col-sm-2">
@@ -64,21 +64,39 @@
                                     </div>
                                 </form>
                                 @foreach($questions as $question)
-                                    <div class="card @if(!$loop->last)mb-3 @endif">
-                                        <div class="card-header">{{ $question->question }}</div>
-                                        <div class="card-body">
-                                            @foreach($question->answers as $answer)
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio"
-                                                    name="questions[{{ $question->id }}]" id="answer-{{ $answer->id }}"
-                                                    value="{{ $answer->id }}" disabled>
-                                                <label class="form-check-label" for="answer-{{ $answer->id }}">
-                                                    {{ $answer->answer }}
-                                                </label>
-                                            </div>
-                                            @endforeach
-                                        </div>
+                                <div class="card @if(!$loop->last)mb-3 @endif">
+                                    <div class="card-header">
+                                        {!! $question->question !!}
+                                        @php
+                                        $data = [];
+                                        $files = Storage::disk('s3')->files('teachers/tests/'.$test->id.'/questions'.'/'.$question->id);
+                                        foreach ($files as $file) {
+                                            $data[] = [
+                                                'name' => basename($file),
+                                                'downloadUrl' => $file,
+                                            ];
+                                        }
+                                        @endphp
+                                        @foreach($data as $data)
+                                        <audio controls>
+                                            <source src="{{ Storage::disk('s3')->url($data['downloadUrl']) }}" type="audio/mpeg">
+                                            </audio>
+                                        @endforeach
                                     </div>
+
+                                    <div class="card-body">
+                                        @foreach($question->answers as $answer)
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio"
+                                                name="questions[{{ $question->id }}]" id="answer-{{ $answer->id }}"
+                                                value="{{ $answer->id }}" disabled>
+                                            <label class="form-check-label" for="answer-{{ $answer->id }}">
+                                                {{ $answer->answer }}
+                                            </label>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                </div>
                                 @endforeach
                             </div>
                         </div>
@@ -88,21 +106,30 @@
         </section>
     </div>
     <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-lg" style="overflow-y: initial">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Add new Question</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <div class="modal-body">
-                    <form method="POST" action="{{ route('teacher.question.store', $test->id) }}">
+                <div class="modal-body" style="height:800px; overflow-y:auto">
+                    <form method="POST" action="{{ route('teacher.question.store', $test->id) }}"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="question">Enter Question</label>
-                                    <input type="text" required="required" name="question" placeholder="Enter Question"
-                                        class="form-control">
+                                    <textarea type="text" required="required" name="question"
+                                        placeholder="Enter Question" class="ckeditor form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="question">File</label>
+                                    <div class="col-md-12">
+                                        <input type="file" name="file" class="form-control" />
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-12">
@@ -191,4 +218,10 @@
                 </div>
             </div>
         </div>
+        <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+        $('.ckeditor').ckeditor();
+    });
+        </script>
         @endsection

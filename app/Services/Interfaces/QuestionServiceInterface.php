@@ -10,5 +10,6 @@ use App\Models\Question;
 interface QuestionServiceInterface extends ServiceInterface
 {
     public function index(Test $test);
+    // public function indexQuesFile(Test $test);
     public function create(Test $test, FormRequest $request);
 }

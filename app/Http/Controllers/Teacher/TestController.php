@@ -61,6 +61,7 @@ class TestController extends Controller
     public function show(Test $test)
     {
         $questions = $this->questionService->index($test);
+        // $files = $this->questionService->indexQuesFile($test);
         return view('teacher.test.show', compact('test', 'questions'));
     }
 

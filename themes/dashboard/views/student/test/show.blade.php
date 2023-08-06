@@ -43,7 +43,7 @@
                                     @csrf
                                     @foreach($questions as $question)
                                     <div class="card @if(!$loop->last)mb-3 @endif">
-                                        <div class="card-header">{{ $question->question }}</div>
+                                        <div class="card-header">{!! $question->question !!}</div>
 
                                         <div class="card-body">
                                             <input type="hidden" name="questions[{{ $question->id }}]" value="">
