@@ -86,7 +86,7 @@
                                             <div class="d-flex flex-start">
                                                 <img class="rounded-circle shadow-1-strong me-3" width="10"
                                                     height="65" />
-                                                <div class="flex-grow-1 flex-shrink-1">
+                                                <div class="flex-grow-1 flex-shrink-1 p-2">
                                                     <div>
                                                         <div class="d-flex justify-content-between align-items-center">
                                                             <p class="mb-1">

@@ -69,8 +69,9 @@
                                             @endif
                                             <td>
                                                 <div class="btn-group">
-                                                    <a class="btn btn-primary"
-                                                        href="{{ route('admin.teacher.edit', $teacher->id) }}">Edit</a>
+                                                    <a class="btn btn-primary mr-1"
+                                                        href="{{ route('admin.teacher.edit', $teacher->id) }}">Edit
+                                                    </a>
                                                     <form action="{{ route('admin.teacher.delete', $teacher->id )}}"
                                                         method="POST">
                                                         @csrf

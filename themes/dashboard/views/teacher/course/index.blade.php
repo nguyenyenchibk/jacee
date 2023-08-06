@@ -31,18 +31,22 @@
                             <div class="card-body">
                                 <div class="row row-cols-2">
                                     @foreach ($courses as $course)
-                                    <div class="card" style="width: 18rem;height:200px">
-                                        <div class="card-header">#{{ $course->id}}</div>
-                                        <div class="card-body  overflow-auto">
-                                            <h5 class="card-title">{{ $course->full_name }}</h5>
-                                            <p class="card-text">{{ $course->description }}</p>
-                                        </div>
-                                        <div class="card-footer">
-                                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                                <a class="btn btn-outline-primary" href="{{ route('teacher.course.show', $course->id) }}" role="button">Show</a>
-                                                @if($course->status == 0)
-                                                    <button type="button" class="btn btn-warining" disabled>Outed Date !</button>
-                                                @endif
+                                    <div class="col">
+                                        <div class="p-1">
+                                            <div class="card" style="height:300px">
+                                                <div class="card-header">#{{ $course->id}} {{ $course->name}}</div>
+                                                <div class="card-body  overflow-auto">
+                                                    <h5 class="card-title">{{ $course->full_name }}</h5>
+                                                    <p class="card-text">{{ $course->description }}</p>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                                        <a class="btn btn-outline-primary" href="{{ route('teacher.course.show', $course->id) }}" role="button">Show</a>
+                                                        @if($course->status == 0)
+                                                            <button type="button" class="btn btn-warining" disabled>Outed Date !</button>
+                                                        @endif
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

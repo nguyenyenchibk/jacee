@@ -32,23 +32,20 @@
                             <div class="card-body">
                                 <div class="row row-cols-2">
                                     @foreach ($categories as $category)
-                                    <div class="card" style="width: 18rem;height:200px">
-                                        <div class="card-header">#{{ $category->id}}</div>
-                                        <div class="card-body  overflow-auto">
-                                            <h5 class="card-title">{{ $category->full_name }}</h5>
-                                            <p class="card-text">{{ $category->description }}</p>
-                                        </div>
-                                        <div class="card-footer">
-                                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                                <a class="btn btn-primary" href="{{ route('admin.category.edit', $category->id) }}">Edit</a>
-                                                {{-- <form id="delete-confirm" action="{{ route('admin.category.delete', $category->id )}}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger show_confirm" data-toggle="tooltip" title='Delete'>
-                                                        {{ __('Delete') }}
-                                                    </button>
-                                                </form> --}}
-                                              </div>
+                                    <div class="col">
+                                        <div class="p-1">
+                                            <div class="card" style="height:200px">
+                                                <div class="card-header">#{{ $category->id}} {{ $category->name}}</div>
+                                                <div class="card-body  overflow-auto">
+                                                    <h5 class="card-title">{{ $category->full_name }}</h5>
+                                                    <p class="card-text">{{ $category->description }}</p>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                                        <a class="btn btn-outline-primary" href="{{ route('admin.category.edit', $category->id) }}" role="button">Edit</a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     @endforeach

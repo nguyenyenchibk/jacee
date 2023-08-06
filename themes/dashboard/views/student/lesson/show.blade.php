@@ -113,8 +113,7 @@
                                                                 <div
                                                                     class="d-flex justify-content-between align-items-center">
                                                                     <p class="mb-1">
-                                                                        {{ $comment->author }} <span class="small text-secondary"> 4
-                                                                            hours ago</span>
+                                                                        {{ $comment->author }} <span class="small text-secondary">{{ $comment->created_at }}</span>
                                                                     </p>
                                                                 </div>
                                                                 <p class="small mb-0">

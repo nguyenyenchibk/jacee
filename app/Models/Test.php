@@ -42,4 +42,9 @@ class Test extends Model
     {
         return $this->belongsToMany(Student::class);
     }
+
+    public function results(): HasMany
+    {
+        return $this->hasMany(Result::class);
+    }
 }

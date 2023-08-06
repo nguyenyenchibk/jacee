@@ -68,13 +68,15 @@
                                             @endif
                                             <td>
                                                 <div class="btn-group">
-                                                    <a class="btn btn-primary"
-                                                        href="{{ route('admin.student.edit', $student->id) }}">Edit</a>
+                                                    <a class="btn btn-primary mr-1"
+                                                        href="{{ route('admin.student.edit', $student->id) }}">Edit
+                                                    </a>
                                                     <form action="{{ route('admin.student.delete', $student->id )}}"
                                                         method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger show_confirm" data-toggle="tooltip" title='Delete'>
+                                                        <button type="submit" class="btn btn-danger show_confirm"
+                                                            data-toggle="tooltip" title='Delete'>
                                                             {{ __('Delete') }}
                                                         </button>
                                                     </form>

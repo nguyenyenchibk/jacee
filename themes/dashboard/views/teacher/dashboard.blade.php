@@ -79,43 +79,29 @@
                     </div>
                 </div>
             </div>
-            <!-- /.content -->
             <form class="mt-0" action="">
                 <div class="form-group row">
-                    <label for="course" class="col-md-1 col-form-label">Select Course:</label>
-                    <div class="col-sm-2">
-                        <p class="form-control-plaintext" id="course">
-                            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
-                                type="search" name="course_id">
-                                <option selected>Open this select course</option>
-                                @foreach($courses as $course)
-                                <option value="{{ $course->id }}" required>{{ $course->code }} - {{ $course->name }}</option>
-                                @endforeach
-                            </select>
-                        </p>
-                    </div>
-                    <label for="time" class="col-form-label">Select Time:</label>
-                    <div class="col-sm-2">
-                        <p class="form-control-plaintext" id="time">
-                            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
-                                type="search" name="time">
-                                <option value="{{ $now }}" selected>{{ $now->format('Y-m') }}</option>
-                            </select>
-                        </p>
-                    </div>
-                    <div class="col-sm-2">
-                        <button type="submit" class="btn btn-outline-primary">
-                            {{ __('Search') }}
-                        </button>
-                    </div>
+                    <select class="form-select mx-2 p-2" id="inputGroupSelect04"
+                        aria-label="Example select with button addon" type="search" name="course_id">
+                        <option selected>Open this select course</option>
+                        @foreach($courses as $course)
+                        <option value="{{ $course->id }}" required>{{ $course->code }}-{{ $course->name }}</option>
+                        @endforeach
+                    </select>
+                    <select class="form-select mr-2 p-2" aria-label=".form-select-lg example" type="search" name="time">
+                        <option value="{{ $now }}" selected>{{ $now->format('Y-m') }}</option>
+                    </select>
+                    <button type="submit" class="btn btn-outline-primary">
+                        {{ __('Search') }}
+                    </button>
                 </div>
-            </form>
         </div>
-        <!-- /.content-wrapper -->
-        <canvas id="canvas" height="280" width="600"></canvas>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-        <script>
-            var labels = <?php echo $labels; ?>;
+        </form>
+    </div>
+    <canvas id="canvas" height="280" width="600"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script>
+        var labels = <?php echo $labels; ?>;
             var averages = <?php echo $averages; ?>;
             var barChartData =
             {
@@ -150,5 +136,5 @@
                     }
                 });
             };
-        </script>
-        @endsection
+    </script>
+    @endsection

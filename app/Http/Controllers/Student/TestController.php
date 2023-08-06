@@ -54,7 +54,7 @@ class TestController extends Controller
             'score' => $score,
             'average' => ($score / $test->max_score) * 100
         ]);
-        return redirect()->route('student.test.result', compact('test', 'course', 'lesson'))->with('success', 'Submit test to course successfully.');;;
+        return redirect()->route('student.test.result', compact('test', 'course', 'lesson'))->with('success', 'Submit test to course successfully.');
     }
 
     public function result(Course $course, Lesson $lesson, Test $test)

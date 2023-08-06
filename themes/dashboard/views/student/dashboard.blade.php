@@ -63,22 +63,17 @@
             <form class="mt-0" action="">
                 <div class="form-group row">
                     <label for="course" class="col-md-1 col-form-label">Select Course:</label>
-                    <div class="col-sm-2">
-                        <p class="form-control-plaintext" id="course">
-                            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
-                                type="search" name="course_id">
-                                <option selected>Open this select course</option>
-                                @foreach($courses as $course)
-                                <option value="{{ $course->id }}">{{ $course->code }} - {{ $course->name }}</option>
-                                @endforeach
-                            </select>
-                        </p>
-                    </div>
-                    <div class="col-sm-2">
+                    <div class="input-group mb-3 col-sm-8">
+                        <select class="form-select col-sm-5" id="inputGroupSelect02" type="search" name="course_id">
+                            <option selected>Open this select course</option>
+                            @foreach($courses as $course)
+                            <option value="{{ $course->id }}">{{ $course->code }} - {{ $course->name }}</option>
+                            @endforeach
+                        </select>
                         <button type="submit" class="btn btn-outline-primary">
                             {{ __('Search') }}
                         </button>
-                    </div>
+                      </div>
                 </div>
             </form>
         </div>
