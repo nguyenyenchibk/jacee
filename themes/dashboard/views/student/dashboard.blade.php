@@ -28,7 +28,7 @@
 @overwrite
 @section('content')
 
-<div class="content-wrapper">
+<div class="content-wrapper p-2">
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -48,7 +48,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-3 col-6">
-                    <div class="small-box border border-info">
+                    <div class="small-box border border-primary">
                         <div class="inner">
                             <h3>{{ $courses->count() }}</h3>
 

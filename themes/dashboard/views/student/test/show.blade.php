@@ -2,7 +2,7 @@
 @section('title','Dashboard')
 @section('content')
 
-<div class="content-wrapper">
+<div class="content-wrapper  p-2">
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -23,7 +23,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <div class="card">
+                        <div class="card mt-3">
                             <div class="card-header">
                                 <h3 class="card-title">Test</h3>
                                 <div class="card-tools">
@@ -43,7 +43,24 @@
                                     @csrf
                                     @foreach($questions as $question)
                                     <div class="card @if(!$loop->last)mb-3 @endif">
-                                        <div class="card-header">{!! $question->question !!}</div>
+                                        <div class="card-header">
+                                            {!! $question->question !!}
+                                            @php
+                                            $data = [];
+                                            $files = Storage::disk('s3')->files('teachers/tests/'.$test->id.'/questions'.'/'.$question->id);
+                                            foreach ($files as $file) {
+                                                $data[] = [
+                                                    'name' => basename($file),
+                                                    'downloadUrl' => $file,
+                                                ];
+                                            }
+                                            @endphp
+                                            @foreach($data as $data)
+                                            <audio controls>
+                                                <source src="{{ Storage::disk('s3')->url($data['downloadUrl']) }}" type="audio/mpeg">
+                                                </audio>
+                                            @endforeach
+                                        </div>
 
                                         <div class="card-body">
                                             <input type="hidden" name="questions[{{ $question->id }}]" value="">

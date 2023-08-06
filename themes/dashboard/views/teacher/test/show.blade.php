@@ -2,7 +2,7 @@
 @section('title','Dashboard')
 @section('content')
 
-<div class="content-wrapper">
+<div class="content-wrapper p-2">
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -23,7 +23,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <div class="card">
+                        <div class="card mt-3">
                             <div class="card-header">
                                 <h3 class="card-title">Test Information</h3>
                                 <div class="card-tools">

@@ -87,10 +87,10 @@
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar sidebar-dark-primary" style="background-color: #212529 !important">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
-                <span class="brand-text font-weight-light">Jacee</span>
+            <a href="#" class="brand-link">
+                <span class="brand-text font-weight-light text-white">Jacee</span>
             </a>
             <div class="sidebar">
                 <nav class="mt-2">
@@ -100,7 +100,7 @@
                         <li class="nav-item">
                             <a href="{{ url('admin/dashboard')}}" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
+                                <p class="text-white">
                                     Dashboard
                                 </p>
                             </a>
@@ -109,33 +109,33 @@
                         <li class="nav-item">
                             <a href="{{ route('admin.teacher.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Manage Teacher</p>
+                                <p class="text-white">Manage Teacher</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
                             <a href="{{ route('admin.student.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Manage Student</p>
+                                <p class="text-white">Manage Student</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
                             <a href="{{ route('admin.category.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Category</p>
+                                <p class="text-white">Category</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('admin.course.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Course</p>
+                                <p class="text-white">Course</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ url('admin/logout')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Logout</p>
+                                <p class="text-white">Logout</p>
                             </a>
                         </li>
                     </ul>

@@ -84,9 +84,9 @@
                 @yield('notifications')
             </ul>
         </nav>
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <a href="index3.html" class="brand-link">
-                <span class="brand-text font-weight-light">Jacee</span>
+        <aside class="main-sidebar sidebar-dark-primary" style="background-color: #212529 !important">
+            <a href="#" class="brand-link">
+                <span class="brand-text font-weight-light text-white">Jacee</span>
             </a>
             <div class="sidebar">
                 <nav class="mt-2">
@@ -96,7 +96,7 @@
                         <li class="nav-item">
                             <a href="{{ url('teacher/dashboard')}}" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
+                                <p class="text-white">
                                     Dashboard
                                 </p>
                             </a>
@@ -105,14 +105,14 @@
                         <li class="nav-item">
                             <a href="{{ route('teacher.course.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>My Course</p>
+                                <p class="text-white">My Course</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
                             <a href="{{ url('teacher/logout')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Logout</p>
+                                <p class="text-white">Logout</p>
                             </a>
                         </li>
                     </ul>
