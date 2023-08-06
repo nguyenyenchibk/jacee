@@ -62,7 +62,6 @@
             </div>
             <form class="mt-0" action="">
                 <div class="form-group row">
-                    <label for="course" class="col-md-1 col-form-label">Select Course:</label>
                     <div class="input-group mb-3 col-sm-8">
                         <select class="form-select col-sm-5" id="inputGroupSelect02" type="search" name="course_id">
                             <option selected>Open this select course</option>

@@ -9,6 +9,7 @@ use App\Http\Requests\Admin\Course\CourseRequest;
 use App\Http\Requests\Admin\Course\UpdateCourseRequest;
 use App\Services\Interfaces\TeacherServiceInterface;
 use App\Services\Interfaces\CategoryServiceInterface;
+use Illuminate\Http\Request;
 class CourseController extends Controller
 {
     protected $courseService;
@@ -26,10 +27,11 @@ class CourseController extends Controller
         $this->categoryService = $categoryService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $courses = $this->courseService->index();
-        return view('admin.course.index', compact('courses'));
+        $courses = $this->courseService->index($request);
+        $categories = $this->categoryService->getActiveCate();
+        return view('admin.course.index', compact('courses', 'categories'));
     }
 
     /**

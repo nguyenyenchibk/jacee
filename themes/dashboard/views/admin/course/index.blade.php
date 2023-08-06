@@ -30,6 +30,21 @@
                                 </div>
                             </div>
                             <div class="card-body">
+                                <form class="mt-0" action="">
+                                    <div class="form-group row">
+                                        <div class="input-group mb-3 col-sm-8">
+                                            <select class="form-select col-sm-5" id="inputGroupSelect02" type="search" name="category_id">
+                                                <option  value="0" selected>Open this select category</option>
+                                                @foreach($categories as $category)
+                                                <option value="{{ $category->id }}">{{ $category->code }} - {{ $category->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            <button type="submit" class="btn btn-outline-primary">
+                                                {{ __('Search') }}
+                                            </button>
+                                          </div>
+                                    </div>
+                                </form>
                                 <div class="row row-cols-2">
                                     @foreach ($courses as $course)
                                     <div class="col">

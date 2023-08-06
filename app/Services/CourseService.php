@@ -11,11 +11,17 @@ use App\Notifications\AddStudentToCourseNotification;
 use App\Models\Teacher;
 use App\Models\Student;
 use App\Models\CourseStudent;
+use Illuminate\Http\Request;
 class CourseService extends Service implements CourseServiceInterface
 {
-    public function index()
+    public function index(Request $request)
     {
-        $courses = Course::all();
+        if ($request['category_id'])
+        {
+            $courses = Course::where('category_id', $request['category_id'])->get();
+        } else {
+            $courses = Course::get();
+        }
         return $courses;
     }
 
@@ -43,9 +49,15 @@ class CourseService extends Service implements CourseServiceInterface
         return true;
     }
 
-    public function teacherGetCourse()
+    public function teacherGetCourse(Request $request)
     {
-        $courses = Course::where('teacher_id', auth()->guard('teacher')->user()->id)->get();
+        if ($request['category_id'])
+        {
+            $courses = Course::where('teacher_id', auth()->guard('teacher')->user()->id)
+                                ->where('category_id', $request['category_id'])->get();
+        } else {
+            $courses = Course::where('teacher_id', auth()->guard('teacher')->user()->id)->get();
+        }
         return $courses;
     }
 
@@ -69,9 +81,14 @@ class CourseService extends Service implements CourseServiceInterface
         return $student;
     }
 
-    public function getCourseOfStudent()
+    public function getCourseOfStudent(Request $request)
     {
-        $courses = auth()->guard('student')->user()->courses()->get();
+        if ($request['category_id'])
+        {
+            $courses = auth()->guard('student')->user()->courses()->where('category_id', $request['category_id'])->get();
+        } else {
+            $courses = auth()->guard('student')->user()->courses()->get();
+        }
         return $courses;
     }
 
