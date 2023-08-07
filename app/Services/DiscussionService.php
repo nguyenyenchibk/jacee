@@ -22,11 +22,15 @@ class DiscussionService extends Service implements DiscussionServiceInterface
             {
                 $author = Teacher::where('id', $authors[1])->get('name')->toArray();
                 $discussion->author = $author[0]['name'];
+                $discussion->creater = $authors[0];
+                $discussion->teacher_id = $authors[1];
             }
             if(strcmp($authors[0], "stu") == 0)
             {
                 $author = Student::where('id', $authors[1])->get('name')->toArray();
                 $discussion->author = $author[0]['name'];
+                $discussion->creater = $authors[0];
+                $discussion->student_id = $authors[1];
             }
         }
         return $discussions;

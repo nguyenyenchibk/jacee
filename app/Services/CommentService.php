@@ -12,24 +12,27 @@ use App\Models\Teacher;
 
 class CommentService extends Service implements CommentServiceInterface
 {
-    public function index(Discussion $discussion)
+    public function index()
     {
-        $comments = Comment::where('discussion_id', $discussion->id)->get();
+        $can_delete = 0;
+        $comments = Comment::get();
         foreach($comments as $comment)
         {
             $authors = explode('_', $comment->created_by);
-            if(strcmp($authors[0], "te") == 0)
+            if(strcmp($authors[0], "te") == 0 && auth()->guard('teacher')->user()->id == $authors[1])
             {
-                $author = Teacher::where('id', $authors[1])->get('name')->toArray();
-                $comment->author = $author[0]['name'];
+                $can_delete = 1;
             }
             if(strcmp($authors[0], "stu") == 0)
             {
                 $author = Student::where('id', $authors[1])->get('name')->toArray();
                 $comment->author = $author[0]['name'];
+                if (auth()->guard('student')->user()->id == $authors[1]) {
+                    $can_delete = 1;
+                }
             }
         }
-        return $comments;
+        return $can_delete;
     }
 
     public function teacherCreate(Discussion $discussion, Request $request)

@@ -94,6 +94,19 @@
                                                                 <span class="small text-secondary"> {{
                                                                     $discussion->created_at }}</span>
                                                             </p>
+                                                            @if(strcmp($discussion->creater, "te") == 0 &&
+                                                            auth()->guard('teacher')->user()->id == $discussion->teacher_id)
+                                                            <form
+                                                                action="{{ route('teacher.discussion.delete', [$course, $lesson, $discussion])}}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <a type="submit" class="text-danger show_confirm mr-3"
+                                                                    data-toggle="tooltip" title='Delete'>
+                                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                                </a>
+                                                            </form>
+                                                            @endif
                                                         </div>
                                                         <p class="small mb-0">
                                                             {{ $discussion->content }}
@@ -103,13 +116,17 @@
                                                     @php
                                                     $authors = explode('_', $comment->created_by);
                                                     if(strcmp($authors[0], "te") == 0)
+                                                    {
                                                     $author = DB::table('teachers')->where('id',
                                                     $authors[1])->get('name')->toArray();
                                                     $comment->author = $author[0]->name;
+                                                    }
                                                     if(strcmp($authors[0], "stu") == 0)
+                                                    {
                                                     $author = DB::table('students')->where('id',
                                                     $authors[1])->get('name')->toArray();
                                                     $comment->author = $author[0]->name;
+                                                    }
                                                     @endphp
                                                     <div class="d-flex flex-start mt-4">
                                                         <a class="me-3" href="#">
@@ -121,9 +138,25 @@
                                                                 <div
                                                                     class="d-flex justify-content-between align-items-center">
                                                                     <p class="mb-1">
-                                                                        {{ $comment->author }} <span
-                                                                            class="small text-secondary">{{ $comment->created_at }}</span>
+                                                                        {{ $comment->author }}
+                                                                        <span class="small text-secondary">{{
+                                                                            $comment->created_at }}</span>
                                                                     </p>
+                                                                    @if(strcmp($authors[0], "te") == 0 &&
+                                                                    auth()->guard('teacher')->user()->id == $authors[1])
+                                                                    <form
+                                                                        action="{{ route('teacher.comment.delete', [$course, $lesson, $comment])}}"
+                                                                        method="POST">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <a type="submit"
+                                                                            class="text-danger show_confirm mr-3"
+                                                                            data-toggle="tooltip" title='Delete'>
+                                                                            <i class="fa fa-trash"
+                                                                                aria-hidden="true"></i>
+                                                                        </a>
+                                                                    </form>
+                                                                    @endif
                                                                 </div>
                                                                 <p class="small mb-0">
                                                                     {{ $comment->content }}
@@ -203,7 +236,7 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-10">
-                                <input type="text" name="url" class="form-control" placeholder="Link youtube video"/>
+                                <input type="text" name="url" class="form-control" placeholder="Link youtube video" />
                             </div>
                             <div class="col-md-2">
                                 <button type="submit" class="btn btn-success">Add Link</button>

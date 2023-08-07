@@ -36,9 +36,11 @@ Route::prefix('student')->middleware('theme:student')->name('student.')->group(f
         });
         Route::controller(DiscussionController::class)->prefix('lessons')->name('discussion.')->group(function () {
             Route::post('{course}/{lesson}/discussion', 'store')->name('store');
+            Route::delete('{course}/{lesson}/discussions/{discussion}', 'destroy')->name('delete');
         });
         Route::controller(CommentController::class)->prefix('lessons')->name('comment.')->group(function () {
             Route::post('{course}/{lesson}/{discussion}/comment', 'store')->name('store');
+            Route::delete('{course}/lessons/{lesson}/comments/{comment}', 'destroy')->name('delete');
         });
         Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
     });

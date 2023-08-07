@@ -8,6 +8,7 @@ use App\Services\Interfaces\CommentServiceInterface;
 use App\Models\Lesson;
 use App\Models\Course;
 use App\Models\Discussion;
+use App\Models\Comment;
 
 class CommentController extends Controller
 {
@@ -22,5 +23,11 @@ class CommentController extends Controller
     {
         $this->commentService->studentCreate($discussion, $request);
         return redirect()->route('student.lesson.show', compact('course', 'lesson'));
+    }
+
+    public function destroy(Course $course, Lesson $lesson, Comment $comment)
+    {
+        $comment->delete();
+        return redirect()->route('student.lesson.show', compact('course', 'lesson'))->with('success', 'Delete comment successfully.');
     }
 }

@@ -47,9 +47,11 @@ Route::prefix('teacher')->middleware('theme:teacher')->name('teacher.')->group(f
         });
         Route::controller(DiscussionController::class)->prefix('lessons')->name('discussion.')->group(function () {
             Route::post('{course}/{lesson}/discussion', 'store')->name('store');
+            Route::delete('{course}/{lesson}/discussions/{discussion}', 'destroy')->name('delete');
         });
         Route::controller(CommentController::class)->prefix('lessons')->name('comment.')->group(function () {
             Route::post('{course}/{lesson}/{discussion}/comment', 'store')->name('store');
+            Route::delete('{course}/lessons/{lesson}/comments/{comment}', 'destroy')->name('delete');
         });
         Route::controller(QuestionController::class)->prefix('tests')->name('question.')->group(function () {
             Route::post('{test}/questions', 'store')->name('store');

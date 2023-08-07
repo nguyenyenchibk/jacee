@@ -81,13 +81,26 @@
                                             <div class="d-flex flex-start">
                                                 <img class="rounded-circle shadow-1-strong me-3"
                                                     width="10" height="65" />
-                                                <div class="flex-grow-1 flex-shrink-1">
+                                                <div class="flex-grow-1 flex-shrink-1 p-2">
                                                     <div>
                                                         <div class="d-flex justify-content-between align-items-center">
                                                             <p class="mb-1">
                                                                 {{ $discussion->author }}
                                                                 <span class="small text-secondary"> {{ $discussion->created_at }}</span>
                                                             </p>
+                                                            @if(strcmp($discussion->creater, "stu") == 0 &&
+                                                            auth()->guard('student')->user()->id == $discussion->student_id)
+                                                            <form
+                                                                action="{{ route('student.discussion.delete', [$course, $lesson, $discussion])}}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <a type="submit" class="text-danger show_confirm mr-3"
+                                                                    data-toggle="tooltip" title='Delete'>
+                                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                                </a>
+                                                            </form>
+                                                            @endif
                                                         </div>
                                                         <p class="small mb-0">
                                                             {{ $discussion->content }}
@@ -115,6 +128,18 @@
                                                                     <p class="mb-1">
                                                                         {{ $comment->author }} <span class="small text-secondary">{{ $comment->created_at }}</span>
                                                                     </p>
+                                                                    @if((strcmp($authors[0], "stu") == 0 && auth()->guard('student')->user()->id == $authors[1]))
+                                                                    <form action="{{ route('student.comment.delete', [$course, $lesson, $comment])}}" method="POST">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <a type="submit"
+                                                                            class="text-danger show_confirm mr-3"
+                                                                            data-toggle="tooltip" title='Delete'>
+                                                                            <i class="fa fa-trash"
+                                                                                aria-hidden="true"></i>
+                                                                        </a>
+                                                                    </form>
+                                                                    @endif
                                                                 </div>
                                                                 <p class="small mb-0">
                                                                     {{ $comment->content }}
@@ -167,4 +192,24 @@
             </div>
         </section>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+    <script type="text/javascript">
+        $('.show_confirm').click(function(event) {
+      var form =  $(this).closest("form");
+      var name = $(this).data("name");
+      event.preventDefault();
+      swal({
+          title: `Are you sure you want to delete this record?`,
+          text: "If you delete this, it will be gone forever.",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          form.submit();
+        }
+      });
+    });
+    </script>
     @endsection

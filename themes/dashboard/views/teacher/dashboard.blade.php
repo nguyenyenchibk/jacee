@@ -98,7 +98,7 @@
         </div>
         </form>
     </div>
-    <canvas id="canvas" height="280" width="600"></canvas>
+    <canvas id="canvas" height="200" width="500"></canvas>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
     <script>
         var labels = <?php echo $labels; ?>;

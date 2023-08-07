@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Services\Interfaces\DiscussionServiceInterface;
 use App\Models\Lesson;
 use App\Models\Course;
+use App\Models\Discussion;
 
 class DiscussionController extends Controller
 {
@@ -21,5 +22,12 @@ class DiscussionController extends Controller
     {
         $this->discussionService->teacherCreate($lesson, $request);
         return redirect()->route('teacher.lesson.show', compact('course', 'lesson'));
+    }
+
+    public function destroy(Course $course, Lesson $lesson, Discussion $discussion)
+    {
+        $discussion->comments()->delete();
+        $discussion->delete();
+        return redirect()->route('teacher.lesson.show', compact('course', 'lesson'))->with('success', 'Delete discussion successfully.');
     }
 }
