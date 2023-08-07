@@ -54,6 +54,7 @@ Route::prefix('teacher')->middleware('theme:teacher')->name('teacher.')->group(f
         Route::controller(QuestionController::class)->prefix('tests')->name('question.')->group(function () {
             Route::post('{test}/questions', 'store')->name('store');
             Route::get('questions/{question}/show', 'show')->name('show');
+            Route::delete('{test}/questions/{question}', 'destroy')->name('delete');
         });
         Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
     });

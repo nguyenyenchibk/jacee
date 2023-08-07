@@ -66,7 +66,18 @@
                                 @foreach($questions as $question)
                                 <div class="card @if(!$loop->last)mb-3 @endif">
                                     <div class="card-header">
+                                        <div class="d-flex">
+                                        <form action="{{ route('teacher.question.delete', [$test, $question] )}}"
+                                            method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a type="submit" class="text-danger show_confirm mr-3"
+                                                data-toggle="tooltip" title='Delete'>
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </a>
+                                        </form>
                                         {!! $question->question !!}
+                                        </div>
                                         @php
                                         $data = [];
                                         $files = Storage::disk('s3')->files('teachers/tests/'.$test->id.'/questions'.'/'.$question->id);
@@ -218,10 +229,4 @@
                 </div>
             </div>
         </div>
-        <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-        $('.ckeditor').ckeditor();
-    });
-        </script>
         @endsection

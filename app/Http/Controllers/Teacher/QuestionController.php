@@ -89,8 +89,9 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Question $question)
+    public function destroy(Test $test, Question $question)
     {
-        //
+        $question->delete();
+        return redirect()->route('teacher.test.show', compact('test'))->with('success', 'Delete question successfully.');
     }
 }
