@@ -59,7 +59,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <a class="btn btn-info btn-sm" href="javascript:;" data-toggle="modal"
+                                        <a class="btn btn-info btn" href="javascript:;" data-toggle="modal"
                                             data-target="#myModal">Add question</a>
                                     </div>
                                 </form>

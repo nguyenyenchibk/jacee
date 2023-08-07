@@ -69,7 +69,7 @@
                                 @foreach ($tests as $test)
                                 <div class="card mt-3">
                                     <div class="card-header">
-                                        #{{ $test->id}}
+                                        #{{ $test->id}} - {{ $test->name }}
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $test->name }}</h5>
