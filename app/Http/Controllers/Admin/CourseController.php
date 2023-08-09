@@ -55,7 +55,7 @@ class CourseController extends Controller
     public function store(CourseRequest $request)
     {
         $this->courseService->create($request);
-        return redirect()->route('admin.course.index');
+        return redirect()->route('admin.course.index')->with('success', 'Course Created successfully.');
     }
 
     /**

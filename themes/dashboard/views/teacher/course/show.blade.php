@@ -57,7 +57,7 @@
                                 @foreach ($lessons as $lesson)
                                 <div class="card">
                                     <div class="card-header">
-                                        #{{ $lesson->id}}
+                                        #{{ $lesson->id}} - {{ $lesson->name }}
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $lesson->name }}</h5>

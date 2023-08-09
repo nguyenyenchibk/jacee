@@ -73,7 +73,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="student_id">Enter Student</label>
-                                    <table class="table table-striped table-bordered table-hover datatable">
+                                    <table class="table table-striped table-bordered table-hover">
                                         <thead>
                                             <tr>
                                                 <th></th>

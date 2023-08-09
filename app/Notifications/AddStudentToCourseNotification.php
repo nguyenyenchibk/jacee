@@ -28,7 +28,9 @@ class AddStudentToCourseNotification extends Notification
     public function toArray($notifiable)
     {
         $course = Course::leftjoin('course_student','courses.id', '=', 'course_student.course_id')
-                        ->where('course_student.student_id', $this->student->student_id)->first();
+                        ->where('course_student.student_id', $this->student->id)
+                        ->orderBy('course_student.created_at', 'asc')
+                        ->first();
         return [
             'student_id' => $this->student->id,
             'course_name' => $course->name,
