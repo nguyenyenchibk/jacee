@@ -24,6 +24,7 @@ Route::prefix('teacher')->middleware('theme:teacher')->name('teacher.')->group(f
     });
     Route::middleware(['auth:teacher'])->middleware('theme:dashboard')->group(function(){
         Route::get('/dashboard',[TeacherController::class,'index'])->name('dashboard');
+        Route::get('dashboard/export/', [TeacherController::class, 'export'])->name('export');
         Route::post('/markasread/{notification}',[TeacherController::class, 'markasread'])->name('markasread');
         Route::controller(CourseController::class)->prefix('courses')->name('course.')->group(function () {
             Route::get('/', 'teacherGetCourse')->name('index');

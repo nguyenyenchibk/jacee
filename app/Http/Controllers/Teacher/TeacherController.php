@@ -8,6 +8,8 @@ use App\Models\Student;
 use App\Models\StudentTest;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\StudentTestExport;
 
 class TeacherController extends Controller
 {
@@ -24,6 +26,7 @@ class TeacherController extends Controller
         $now = Carbon::now();
         $labels = ['0-9', '10-19', '20-29', '30-39', '40-49', '50-59', '60-69', '70-79', '80-89', '90-99', '100'];
         $averages = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        $student_test = [];
         if ($request['course_id'] && $request['time']) {
             $date = Carbon::parse($request['time'])->format('Y-m-d');
             $dates = explode('-', $date);
@@ -60,9 +63,18 @@ class TeacherController extends Controller
                     $averages[10]++;
                 }
             }
+            $student_test = StudentTest::leftJoin('tests', 'student_test.test_id', '=', 'tests.id')
+                ->leftJoin('students', 'students.id', '=', 'student_test.student_id')
+                ->leftJoin('lessons', 'tests.lesson_id', '=', 'lessons.id')
+                ->where('lessons.course_id', '=', $request['course_id'])
+                ->whereMonth('student_test.created_at', $month)
+                ->whereYear('student_test.created_at', $year)
+                ->select('tests.id as test_id', 'tests.name as test_name', 'students.email as student_email', 'student_test.average as average')
+                ->orderBy('test_id', 'asc')
+                ->get();
         }
         $notifications = auth()->guard('teacher')->user()->unreadNotifications;
-        return view('teacher.dashboard', compact('total_student', 'total_course', 'courses', 'now', 'notifications'))
+        return view('teacher.dashboard', compact('total_student', 'total_course', 'courses', 'now', 'notifications', 'student_test'))
             ->with('averages', json_encode($averages, JSON_NUMERIC_CHECK))->with('labels', json_encode($labels));
     }
 
@@ -72,5 +84,10 @@ class TeacherController extends Controller
             auth()->guard('teacher')->user()->unreadNotifications->where('id', $id)->markAsRead();
         }
         return back();
+    }
+
+    public function export()
+    {
+        return Excel::download(new StudentTestExport, 'student_test.xlsx');
     }
 }

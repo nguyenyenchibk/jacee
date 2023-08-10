@@ -26,7 +26,8 @@
                             <div class="card-header">
                                 <h3 class="card-title">List</h3>
                                 <div class="card-tools">
-                                    <a href="{{ route('teacher.course.show', $course) }}" class="btn btn-light">Cancel</a>
+                                    <a href="{{ route('teacher.course.show', $course) }}"
+                                        class="btn btn-light">Cancel</a>
                                     <a class="btn btn-warning" href="javascript:;" data-toggle="modal"
                                         data-target="#myModal">Add student</a>
                                 </div>
@@ -69,51 +70,46 @@
                 <div class="modal-body">
                     <form method="POST" action="{{ route('teacher.course.storeStudents', $course->id) }}">
                         @csrf
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="student_id">Enter Student</label>
-                                    <table class="table table-striped table-bordered table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th></th>
-                                                <th>#ID</th>
-                                                <th>Name</th>
-                                                <th>Email</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($students as $student)
-                                            @php
-                                                $exist = DB::table('course_student')->where('student_id', $student->id)->where('course_id', $course->id)->first();
-                                            @endphp
-                                            <tr>
-                                                @if($exist)
-                                                    <td><input type="checkbox" value="{{ $student->id }}" name="student_id[{{ $student->id }}]" checked></td>
-                                                @else
-                                                <td><input type="checkbox" value="{{ $student->id }}" name="student_id[{{ $student->id }}]"></td>
-                                                @endif
-                                                <td>{{ $student->id }}</td>
-                                                <td>{{ $student->name }}</td>
-                                                <td>{{ $student->email }}</td>
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                        <tfoot>
-                                        </tfoot>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-warning">
-                                        {{ __('Submit') }}
-                                    </button>
-                                </div>
-                            </div>
+                        <div class="form-group">
+                            <label for="student_id">Enter Student</label>
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>#ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($students as $student)
+                                    @php
+                                    $exist = DB::table('course_student')->where('student_id',
+                                    $student->id)->where('course_id', $course->id)->first();
+                                    @endphp
+                                    <tr>
+                                        @if($exist)
+                                        <td><input type="checkbox" value="{{ $student->id }}"
+                                                name="student_id[{{ $student->id }}]" checked></td>
+                                        @else
+                                        <td><input type="checkbox" value="{{ $student->id }}"
+                                                name="student_id[{{ $student->id }}]"></td>
+                                        @endif
+                                        <td>{{ $student->id }}</td>
+                                        <td>{{ $student->name }}</td>
+                                        <td>{{ $student->email }}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                                <tfoot>
+                                </tfoot>
+                            </table>
+                            <button type="submit" class="btn btn-warning">
+                                {{ __('Submit') }}
+                            </button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-    @endsection
+        @endsection
