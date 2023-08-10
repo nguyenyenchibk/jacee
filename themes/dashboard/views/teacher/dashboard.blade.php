@@ -151,7 +151,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="student_id">Enter Student</label>
-                            <table class="table table-striped table-bordered table-hover">
+                            <table class="table table-striped table-bordered table-hover datatable">
                                 <thead>
                                     <tr>
                                         <th>#Test ID</th>
