@@ -110,11 +110,15 @@
                                                     @php
                                                         $authors = explode('_', $comment->created_by);
                                                     if(strcmp($authors[0], "te") == 0)
+                                                    {
                                                         $author = DB::table('teachers')->where('id', $authors[1])->get('name')->toArray();
                                                         $comment->author = $author[0]->name;
+                                                    }
                                                     if(strcmp($authors[0], "stu") == 0)
+                                                    {
                                                         $author = DB::table('students')->where('id', $authors[1])->get('name')->toArray();
                                                         $comment->author = $author[0]->name;
+                                                    }
                                                     @endphp
                                                     <div class="d-flex flex-start mt-4">
                                                         <a class="me-3" href="#">
